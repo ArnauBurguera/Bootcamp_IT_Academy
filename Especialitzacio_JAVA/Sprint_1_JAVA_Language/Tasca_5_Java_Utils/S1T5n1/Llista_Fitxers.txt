@@ -1,0 +1,9 @@
+(F)ABC.txt -- Última moficicació: 05/10/2023 10:51:29
+(F)README.txt -- Última moficicació: 05/10/2023 10:36:20
+(D)Subcarpeta1 -- Última moficicació: 05/11/2023 08:50:08
+(F)ArxiuTextSubcarpeta1.txt -- Última moficicació: 05/10/2023 10:43:15
+(D)Subcarpeta1_1 -- Última moficicació: 05/11/2023 08:49:41
+(D)Subcarpeta1_2 -- Última moficicació: 05/11/2023 08:50:02
+(D)Subcarpeta2 -- Última moficicació: 05/10/2023 10:43:07
+(F)ArxiuTextSubcarpeta2.txt -- Última moficicació: 05/10/2023 10:42:56
+(F)XYZ.txt -- Última moficicació: 05/10/2023 10:51:39

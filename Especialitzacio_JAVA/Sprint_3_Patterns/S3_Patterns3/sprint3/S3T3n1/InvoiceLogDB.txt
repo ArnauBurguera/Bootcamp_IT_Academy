@@ -1,0 +1,2 @@
+Id = 1 | [(1)Magnolia] | TOTAL: 3.5€
+Id = 2 | [(1)Wood arc] | TOTAL: 45.9€
