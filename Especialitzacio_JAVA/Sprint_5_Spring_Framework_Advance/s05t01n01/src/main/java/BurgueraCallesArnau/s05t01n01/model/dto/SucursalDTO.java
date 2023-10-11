@@ -6,6 +6,13 @@ public class SucursalDTO {
     private String paisSucursal;
     private String tipusSucursal;
 
+    public SucursalDTO(Integer pk_SucursalID, String nomSucursal, String paisSucursal, String tipusSucursal) {
+        this.pk_SucursalID = pk_SucursalID;
+        this.nomSucursal = nomSucursal;
+        this.paisSucursal = paisSucursal;
+        this.tipusSucursal = tipusSucursal;
+    }
+
     public Integer getPk_SucursalID() {
         return pk_SucursalID;
     }
