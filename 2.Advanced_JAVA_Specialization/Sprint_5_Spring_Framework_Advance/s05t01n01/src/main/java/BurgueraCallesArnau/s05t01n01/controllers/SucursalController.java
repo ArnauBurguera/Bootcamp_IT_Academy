@@ -2,10 +2,8 @@ package BurgueraCallesArnau.s05t01n01.controllers;
 
 import BurgueraCallesArnau.s05t01n01.model.dto.SucursalDTO;
 import BurgueraCallesArnau.s05t01n01.model.services.SucursalService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
