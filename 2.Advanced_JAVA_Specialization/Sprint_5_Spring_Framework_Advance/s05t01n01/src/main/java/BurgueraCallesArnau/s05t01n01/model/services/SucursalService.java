@@ -18,7 +18,7 @@ public interface SucursalService {
 
     void deleteSucursal(Integer id);
 
-    Optional<SucursalDTO> getOneSucursal(Integer id);
+    SucursalDTO getOneSucursal(Integer id);
 
     List<SucursalDTO> getAllSucursals();
 }
