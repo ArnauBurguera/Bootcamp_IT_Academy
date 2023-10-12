@@ -1,4 +1,4 @@
-package BurgueraCallesArnau.s05t01n01.model.services.conversions;
+package BurgueraCallesArnau.s05t01n01.model.services.crudutils;
 
 import BurgueraCallesArnau.s05t01n01.model.config.Constants;
 import BurgueraCallesArnau.s05t01n01.model.domain.Sucursal;
