@@ -29,7 +29,7 @@ public class SucursalServiceImpl implements SucursalService {
     }
 
     @Override
-    public SucursalDTO createSucursal(SucursalDTO sucursalDTO) {
+    public SucursalDTO createSucursal(SucursalDTO sucursalDTO) {//Maybe this doesn't have to be a dto
         Sucursal entity = convertToEntity(sucursalDTO);
         return convertToDTO(sucursalRepository.save(entity));
     }
