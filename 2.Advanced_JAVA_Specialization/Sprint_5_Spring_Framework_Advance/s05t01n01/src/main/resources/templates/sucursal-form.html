@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=”en” xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Sucursal</title>
 </head>
 <body>
+<h1>Create a New Sucursal</h1>
+<form th:action="@{/sucursal/add}" th:object="${sucursal}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" /><br/>
 
+    <label for="country">Country:</label>
+    <input type="text" id="country" th:field="*{country}" /><br/>
+
+    <button type="submit">Create Sucursal</button>
+</form>
 </body>
 </html>

@@ -13,8 +13,10 @@ public class Sucursal {
     private String nomSucursal;
     private String paisSucursal;
 
-    public Sucursal(Integer pk_SucursalID, String nomSucursal, String paisSucursal) {
-        this.pk_SucursalID = pk_SucursalID;
+    public Sucursal() {
+    }
+
+    public Sucursal(String nomSucursal, String paisSucursal) {
         this.nomSucursal = nomSucursal;
         this.paisSucursal = paisSucursal;
     }
