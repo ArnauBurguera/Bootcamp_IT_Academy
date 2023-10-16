@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/sucursal")
-public class WebSucursalController {
+public class WebAppSucursalController {
 }

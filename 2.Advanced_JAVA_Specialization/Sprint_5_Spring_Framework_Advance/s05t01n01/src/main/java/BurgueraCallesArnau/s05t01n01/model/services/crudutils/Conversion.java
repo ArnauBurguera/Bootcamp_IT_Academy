@@ -8,15 +8,8 @@ public class Conversion {
 
     //Convert to SucursalDTO methods
     public static SucursalDTO convertToDTO(Sucursal sucursal) {
-        validateSucursal(sucursal);
+        Validation.validateSucursal(sucursal);
         return createDTO(sucursal);
-    }
-
-    private static void validateSucursal(Sucursal sucursal) {
-        if (sucursal == null || sucursal.getPk_SucursalID() == null ||
-                sucursal.getNomSucursal() == null || sucursal.getPaisSucursal() == null) {
-            throw new IllegalArgumentException(Constants.getInvalidSucursal());
-        }
     }
 
     private static SucursalDTO createDTO(Sucursal sucursal) {
@@ -38,16 +31,8 @@ public class Conversion {
 
     //Convert to Sucursal methods
     public static Sucursal convertToEntity(SucursalDTO sucursalDTO) {
-        validateSucursalDTO(sucursalDTO);
+        Validation.validateSucursalDTO(sucursalDTO);
         return createSucursalEntity(sucursalDTO);
-    }
-
-    private static void validateSucursalDTO(SucursalDTO sucursalDTO) {
-        if (sucursalDTO == null || sucursalDTO.getPk_SucursalID() == null ||
-                sucursalDTO.getNomSucursal() == null || sucursalDTO.getPaisSucursal() == null
-                || sucursalDTO.getTipusSucursal() == null) {
-            throw new IllegalArgumentException(Constants.getInvalidSucursalDTO());
-        }
     }
 
     private static Sucursal createSucursalEntity(SucursalDTO sucursalDTO) {

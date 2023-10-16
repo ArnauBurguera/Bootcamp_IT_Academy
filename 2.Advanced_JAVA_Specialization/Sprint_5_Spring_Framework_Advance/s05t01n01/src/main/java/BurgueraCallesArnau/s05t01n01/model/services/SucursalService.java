@@ -10,9 +10,7 @@ public interface SucursalService {
 
     SucursalDTO convertToDTO(Sucursal sucursal);
 
-    Sucursal convertToEntity(SucursalDTO sucursalDTO);
-
-    SucursalDTO createSucursal(SucursalDTO sucursalDTO);
+    Sucursal createSucursal(Sucursal sucursal);
 
     SucursalDTO updateSucursal(SucursalDTO sucursalDTO);
 

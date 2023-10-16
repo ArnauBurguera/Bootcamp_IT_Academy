@@ -5,6 +5,7 @@ import BurgueraCallesArnau.s05t01n01.model.dto.SucursalDTO;
 import BurgueraCallesArnau.s05t01n01.model.repository.SucursalRepository;
 import BurgueraCallesArnau.s05t01n01.model.services.crudutils.Conversion;
 import BurgueraCallesArnau.s05t01n01.model.services.crudutils.UpdateOperation;
+import BurgueraCallesArnau.s05t01n01.model.services.crudutils.Validation;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,15 +25,11 @@ public class SucursalServiceImpl implements SucursalService {
     }
 
     @Override
-    public Sucursal convertToEntity(SucursalDTO sucursalDTO) {
-        return Conversion.convertToEntity(sucursalDTO);
+    public Sucursal createSucursal(Sucursal sucursal) {
+        Validation.validateSucursal(sucursal);
+        return sucursalRepository.save(sucursal);
     }
 
-    @Override
-    public SucursalDTO createSucursal(SucursalDTO sucursalDTO) {//Maybe this doesn't have to be a dto
-        Sucursal entity = convertToEntity(sucursalDTO);
-        return convertToDTO(sucursalRepository.save(entity));
-    }
     @Override
     public SucursalDTO updateSucursal(SucursalDTO sucursalDTO) {
         return UpdateOperation.updateSucursal(sucursalDTO);

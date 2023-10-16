@@ -1,5 +1,6 @@
 package BurgueraCallesArnau.s05t01n01.controllers;
 
+import BurgueraCallesArnau.s05t01n01.model.domain.Sucursal;
 import BurgueraCallesArnau.s05t01n01.model.dto.SucursalDTO;
 import BurgueraCallesArnau.s05t01n01.model.services.SucursalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/sucursal")
-public class SucursalController {
+@RequestMapping("/api/sucursal")
+public class RESTfulSucursalController {
     @Autowired
     private SucursalService sucursalService;
 
     @PostMapping("/add")
-    public ResponseEntity<SucursalDTO> createSucursal(@RequestParam SucursalDTO sucursalDTO){
-        SucursalDTO sucursalCreated = sucursalService.createSucursal(sucursalDTO);
+    public ResponseEntity<Sucursal> createSucursal(@RequestParam Sucursal sucursal){
+        Sucursal sucursalCreated = sucursalService.createSucursal(sucursal);
         return new ResponseEntity<>(sucursalCreated, HttpStatus.CREATED);
     }
 
