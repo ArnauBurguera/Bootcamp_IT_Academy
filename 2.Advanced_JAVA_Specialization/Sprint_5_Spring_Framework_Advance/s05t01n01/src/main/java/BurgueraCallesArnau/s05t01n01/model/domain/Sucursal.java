@@ -21,6 +21,12 @@ public class Sucursal {
         this.paisSucursal = paisSucursal;
     }
 
+    public Sucursal(Integer id, String nom, String pais) {
+        this.pk_SucursalID = id;
+        this.nomSucursal = nom;
+        this.paisSucursal = pais;
+    }
+
     public Integer getPk_SucursalID() {
         return pk_SucursalID;
     }
