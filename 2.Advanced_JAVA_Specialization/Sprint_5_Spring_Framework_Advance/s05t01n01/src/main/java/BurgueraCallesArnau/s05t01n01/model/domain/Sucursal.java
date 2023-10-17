@@ -50,4 +50,13 @@ public class Sucursal {
     public void setPaisSucursal(String paisSucursal) {
         this.paisSucursal = paisSucursal;
     }
+
+    /*@Override
+    public String toString() {
+        return "Sucursal{" +
+                "pk_SucursalID=" + pk_SucursalID +
+                ", nomSucursal='" + nomSucursal + '\'' +
+                ", paisSucursal='" + paisSucursal + '\'' +
+                '}';
+    }*/
 }

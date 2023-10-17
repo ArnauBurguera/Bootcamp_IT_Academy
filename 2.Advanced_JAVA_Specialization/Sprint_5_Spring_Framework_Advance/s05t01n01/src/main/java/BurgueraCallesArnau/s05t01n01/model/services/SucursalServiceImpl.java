@@ -26,7 +26,7 @@ public class SucursalServiceImpl implements SucursalService {
 
     @Override
     public Sucursal createSucursal(Sucursal sucursal) {
-        Validation.validateSucursal(sucursal);
+        Validation.validateSucursalToPersist(sucursal);
         return sucursalRepository.save(sucursal);
     }
 
