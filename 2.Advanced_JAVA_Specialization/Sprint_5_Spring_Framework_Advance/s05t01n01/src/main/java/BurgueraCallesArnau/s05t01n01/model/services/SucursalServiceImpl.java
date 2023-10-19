@@ -31,8 +31,8 @@ public class SucursalServiceImpl implements SucursalService {
     }
 
     @Override
-    public SucursalDTO updateSucursal(SucursalDTO sucursalDTO) {
-        return UpdateOperation.updateSucursal(sucursalDTO);
+    public SucursalDTO updateSucursal(Sucursal sucursal) {
+        return UpdateOperation.updateSucursal(sucursal);
     }
 
     @Override
@@ -45,7 +45,8 @@ public class SucursalServiceImpl implements SucursalService {
         Sucursal entity = getSucursalById(id);
         return convertToDTO(entity);
     }
-    private Sucursal getSucursalById(Integer id) {
+    @Override
+    public Sucursal getSucursalById(Integer id) {
         return sucursalRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Sucursal not found with ID: " + id));
     }

@@ -3,6 +3,7 @@ package BurgueraCallesArnau.s05t01n01.controllers;
 import BurgueraCallesArnau.s05t01n01.model.domain.Sucursal;
 import BurgueraCallesArnau.s05t01n01.model.dto.SucursalDTO;
 import BurgueraCallesArnau.s05t01n01.model.services.SucursalService;
+import BurgueraCallesArnau.s05t01n01.model.services.crudutils.Conversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,15 +42,16 @@ public class WebAppSucursalController {
 
     //UPDATE
     @GetMapping("/update/{id}")
-    public String showUpdateSucursalForm(@PathVariable Integer id, Model model) {
-        model.addAttribute("sucursalId", id);
+    public String showUpdateSucursalForm(@PathVariable("id") Integer id, Model model) {
+        Sucursal existingSucursal = sucursalService.getSucursalById(id);
+        model.addAttribute("sucursal", existingSucursal);
         return "update-form";
     }
 
     @PostMapping("/update")
-    public String updateSucursal(@ModelAttribute SucursalDTO sucursalDTO) {
-        sucursalService.updateSucursal(sucursalDTO);
-        return "redirect:/sucursal/success";
+    public String updateSucursal(@ModelAttribute Sucursal sucursal) {
+        sucursalService.updateSucursal(sucursal);
+        return "redirect:/sucursal/update-success";
     }
 
     @GetMapping("/update-success")

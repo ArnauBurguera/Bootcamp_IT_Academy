@@ -3,6 +3,7 @@ package BurgueraCallesArnau.s05t01n01.controllers;
 import BurgueraCallesArnau.s05t01n01.model.domain.Sucursal;
 import BurgueraCallesArnau.s05t01n01.model.dto.SucursalDTO;
 import BurgueraCallesArnau.s05t01n01.model.services.SucursalService;
+import BurgueraCallesArnau.s05t01n01.model.services.crudutils.Conversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,8 @@ public class RESTfulSucursalController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<SucursalDTO> updateSucursal(@RequestBody SucursalDTO sucursalDTO){
-        SucursalDTO sucursalUpdated = sucursalService.updateSucursal(sucursalDTO);
+    public ResponseEntity<SucursalDTO> updateSucursal(@RequestBody Sucursal sucursal){
+        SucursalDTO sucursalUpdated = sucursalService.updateSucursal(sucursal);
         return new ResponseEntity<>(sucursalUpdated, HttpStatus.OK);
     }
 

@@ -30,16 +30,16 @@ public class Conversion {
     }
 
     //Convert to Sucursal methods
-    public static Sucursal convertToEntity(SucursalDTO sucursalDTO) {
+   /* public static Sucursal convertToEntity(SucursalDTO sucursalDTO) {
         Validation.validateSucursalDTO(sucursalDTO);
         return createSucursalEntity(sucursalDTO);
-    }
+    }*/
 
-    private static Sucursal createSucursalEntity(SucursalDTO sucursalDTO) {
+    /*private static Sucursal createSucursalEntity(SucursalDTO sucursalDTO) {
         Integer id = sucursalDTO.getPk_SucursalID();
         String nom = sucursalDTO.getNomSucursal();
         String pais = sucursalDTO.getPaisSucursal();
 
         return new Sucursal(id, nom, pais);
-    }
+    }*/
 }

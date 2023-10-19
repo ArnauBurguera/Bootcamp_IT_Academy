@@ -5,13 +5,13 @@
 </head>
 <body>
 <h1>Update Sucursal</h1>
-<form th:action="@{/sucursal/update}" method="post">
+<form th:action="@{/sucursal/update}" th:object="${sucursal}" method="post">
   <input type="hidden" th:name="sucursalId" th:value="${sucursalId}" />
 
-  <label for="nomSucursal">New Name:</label>
+  <label for="nomSucursal">Edit Name:</label>
   <input type="text" id="nomSucursal" th:field="*{nomSucursal}" /><br/>
 
-  <label for="paisSucursal">New Country:</label>
+  <label for="paisSucursal">Edit Country:</label>
   <input type="text" id="paisSucursal" th:field="*{paisSucursal}" /><br/>
 
   <button type="submit">Update Sucursal</button>

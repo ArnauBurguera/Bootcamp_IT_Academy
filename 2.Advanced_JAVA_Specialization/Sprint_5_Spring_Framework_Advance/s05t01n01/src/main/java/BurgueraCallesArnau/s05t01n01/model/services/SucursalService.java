@@ -12,11 +12,12 @@ public interface SucursalService {
 
     Sucursal createSucursal(Sucursal sucursal);
 
-    SucursalDTO updateSucursal(SucursalDTO sucursalDTO);
+    SucursalDTO updateSucursal(Sucursal sucursal);
 
     void deleteSucursal(Integer id);
 
     SucursalDTO getOneSucursal(Integer id);
+    Sucursal getSucursalById(Integer id);
 
     List<SucursalDTO> getAllSucursals();
 }

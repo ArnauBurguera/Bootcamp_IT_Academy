@@ -13,10 +13,9 @@ public class UpdateOperation {
 
     @Autowired
     private static SucursalRepository sucursalRepository;
-    public static SucursalDTO updateSucursal(SucursalDTO sucursalDTO) {
-        Sucursal entity = Conversion.convertToEntity(sucursalDTO);
-        Sucursal existingEntity = getExistingEntity(entity.getPk_SucursalID());
-        Sucursal updatedEntity = updateEntity(existingEntity, entity);
+    public static SucursalDTO updateSucursal(Sucursal sucursal) {
+        Sucursal existingEntity = getExistingEntity(sucursal.getPk_SucursalID());
+        Sucursal updatedEntity = updateEntity(existingEntity, sucursal);
         return Conversion.convertToDTO(saveEntity(updatedEntity));
     }
 

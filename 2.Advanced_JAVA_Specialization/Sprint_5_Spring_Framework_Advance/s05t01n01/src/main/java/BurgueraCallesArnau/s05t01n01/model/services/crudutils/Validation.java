@@ -18,11 +18,11 @@ public class Validation {
         }
     }
 
-    public static void validateSucursalDTO(SucursalDTO sucursalDTO) {
+    /*public static void validateSucursalDTO(SucursalDTO sucursalDTO) {
         if (sucursalDTO == null || sucursalDTO.getPk_SucursalID() == null ||
                 sucursalDTO.getNomSucursal() == null || sucursalDTO.getPaisSucursal() == null
                 || sucursalDTO.getTipusSucursal() == null) {
             throw new IllegalArgumentException(Constants.getInvalidSucursalDTO());
         }
-    }
+    }*/
 }
