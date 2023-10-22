@@ -3,11 +3,12 @@ package BurgueraCallesArnau.s05t01n01.controllers;
 import BurgueraCallesArnau.s05t01n01.model.domain.Sucursal;
 import BurgueraCallesArnau.s05t01n01.model.dto.SucursalDTO;
 import BurgueraCallesArnau.s05t01n01.model.services.SucursalService;
-import BurgueraCallesArnau.s05t01n01.model.services.crudutils.Conversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/sucursal")
@@ -84,5 +85,13 @@ public class WebAppSucursalController {
     public String successfulDeletionPage(Model model) {
         model.addAttribute("title", "Sucursal deleted successfully!");
         return "success";
+    }
+
+    //SHOW ALL
+    @GetMapping("/sucursals")
+    public String listSucursalDTOs(Model model) {
+        List<SucursalDTO> sucursalDTOs = sucursalService.getAllSucursals();
+        model.addAttribute("sucursals", sucursalDTOs);
+        return "sucursal-list";
     }
 }

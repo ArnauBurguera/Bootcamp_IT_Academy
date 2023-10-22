@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sucursals</title>
+</head>
+<body>
+
+<h2>List of Sucursals</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Type</th> <!-- New column for 'Type' -->
+        <th>Action</th>
+    </tr>
+    <tr th:each="sucursal : ${sucursals}">
+        <td th:text="${sucursal.pk_SucursalID}"></td>
+        <td th:text="${sucursal.nomSucursal}"></td>
+        <td th:text="${sucursal.paisSucursal}"></td>
+        <td th:text="${sucursal.tipusSucursal}"></td>
+        <td>
+            <a th:href="@{'/sucursal/delete/' + ${sucursal.pk_SucursalID}}">Delete</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
