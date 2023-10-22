@@ -6,13 +6,18 @@ import BurgueraCallesArnau.s05t01n01.model.repository.SucursalRepository;
 import BurgueraCallesArnau.s05t01n01.model.services.crudutils.Conversion;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-
+@Component
 public class UpdateOperation {
+    private static SucursalRepository sucursalRepository;
 
     @Autowired
-    private static SucursalRepository sucursalRepository;
+    public UpdateOperation(SucursalRepository sucursalRepository) {
+        UpdateOperation.sucursalRepository = sucursalRepository;
+    }
     public static SucursalDTO updateSucursal(Sucursal sucursal) {
         Sucursal existingEntity = getExistingEntity(sucursal.getPk_SucursalID());
         Sucursal updatedEntity = updateEntity(existingEntity, sucursal);

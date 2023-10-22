@@ -25,7 +25,10 @@ public class WebAppSucursalController {
     //ADD
     @GetMapping("/add")
     public String showAddSucursalForm(Model model) {
+        model.addAttribute("title", "Create new Sucursal");
+        model.addAttribute("button", "Create");
         model.addAttribute("sucursal", new Sucursal());
+        model.addAttribute("action", "add");
         return "sucursal-form";
     }
 
@@ -37,15 +40,19 @@ public class WebAppSucursalController {
 
     @GetMapping("/creation-success")
     public String succesPage(Model model) {
-        return "sucursal-success";
+        model.addAttribute("title", "Sucursal created successfully!");
+        return "success";
     }
 
     //UPDATE
     @GetMapping("/update/{id}")
     public String showUpdateSucursalForm(@PathVariable("id") Integer id, Model model) {
         Sucursal existingSucursal = sucursalService.getSucursalById(id);
+        model.addAttribute("title", "Update");
+        model.addAttribute("button", "Update");
         model.addAttribute("sucursal", existingSucursal);
-        return "update-form";
+        model.addAttribute("action", "update");
+        return "sucursal-form";
     }
 
     @PostMapping("/update")
@@ -56,6 +63,26 @@ public class WebAppSucursalController {
 
     @GetMapping("/update-success")
     public String successfulUpdatePage(Model model) {
-        return "update-success";
+        model.addAttribute("title", "Sucursal updated successfully!");
+        return "success";
+    }
+
+    //DELETE
+    @GetMapping("/delete/{id}")
+    public String showDeleteConfirmation(@PathVariable("id") Integer id, Model model) {
+        Sucursal sucursalToDelete = sucursalService.getSucursalById(id);
+        model.addAttribute("sucursal", sucursalToDelete);
+        return "delete-confirmation";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteSucursal(@PathVariable("id") Integer id) {
+        sucursalService.deleteSucursal(id);
+        return "redirect:/sucursal/deletion-success";
+    }
+    @GetMapping("/deletion-success")
+    public String successfulDeletionPage(Model model) {
+        model.addAttribute("title", "Sucursal deleted successfully!");
+        return "success";
     }
 }

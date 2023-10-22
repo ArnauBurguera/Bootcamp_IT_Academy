@@ -51,12 +51,12 @@ public class Sucursal {
         this.paisSucursal = paisSucursal;
     }
 
-    /*@Override
+    @Override
     public String toString() {
         return "Sucursal{" +
                 "pk_SucursalID=" + pk_SucursalID +
                 ", nomSucursal='" + nomSucursal + '\'' +
                 ", paisSucursal='" + paisSucursal + '\'' +
                 '}';
-    }*/
+    }
 }

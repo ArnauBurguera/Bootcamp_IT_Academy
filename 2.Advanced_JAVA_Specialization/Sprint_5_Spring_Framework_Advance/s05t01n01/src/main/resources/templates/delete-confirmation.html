@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+<body>
+
+<h2>Delete Sucursal</h2>
+<p>Are you sure you want to delete the following Sucursal?</p>
+<p>Name: <span th:text="${sucursal.nomSucursal}"></span></p>
+<p>Country: <span th:text="${sucursal.paisSucursal}"></span></p>
+
+<form method="post" th:action="@{'/sucursal/delete/' + ${sucursal.pk_SucursalID}}">
+    <button type="submit">Confirm</button>
+</form>
+
+<a th:href="@{/sucursal/list}">Cancel</a>
+
+</body>
+</html>

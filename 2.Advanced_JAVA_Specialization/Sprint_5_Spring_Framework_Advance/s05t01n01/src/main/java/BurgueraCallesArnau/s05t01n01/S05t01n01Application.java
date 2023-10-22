@@ -8,9 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-/*@ComponentScan(basePackages = {"BurgueraCallesArnau.s05t01n01"})
-@EnableJpaRepositories(basePackages = {"BurgueraCallesArnau.s05t01n01.model.repository"})
-@EntityScan(basePackages = {"BurgueraCallesArnau.s05t01n01.model.domain"})*/
 public class S05t01n01Application {
 
 	public static void main(String[] args) {
