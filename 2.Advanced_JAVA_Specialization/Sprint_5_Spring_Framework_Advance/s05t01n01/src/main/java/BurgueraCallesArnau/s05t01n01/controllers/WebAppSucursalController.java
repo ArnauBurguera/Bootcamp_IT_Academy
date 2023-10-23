@@ -17,12 +17,6 @@ public class WebAppSucursalController {
     @Autowired
     private SucursalService sucursalService;
 
-    //HOME
-    @GetMapping("/home")
-    public String showHome(Model model){
-        return "home";
-    }
-
     //ADD
     @GetMapping("/add")
     public String showAddSucursalForm(Model model) {
@@ -88,7 +82,7 @@ public class WebAppSucursalController {
     }
 
     //SHOW ALL
-    @GetMapping("/sucursals")
+    @GetMapping("/home")
     public String listSucursalDTOs(Model model) {
         List<SucursalDTO> sucursalDTOs = sucursalService.getAllSucursals();
         model.addAttribute("sucursals", sucursalDTOs);
