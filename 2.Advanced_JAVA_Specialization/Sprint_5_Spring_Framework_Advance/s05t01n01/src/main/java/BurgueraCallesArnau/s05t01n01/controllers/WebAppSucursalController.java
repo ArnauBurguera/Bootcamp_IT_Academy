@@ -20,7 +20,7 @@ public class WebAppSucursalController {
     //ADD
     @GetMapping("/add")
     public String showAddSucursalForm(Model model) {
-        model.addAttribute("title", "Create new Sucursal");
+        model.addAttribute("title", "Create New Sucursal");
         model.addAttribute("button", "Create");
         model.addAttribute("sucursal", new Sucursal());
         model.addAttribute("action", "add");
