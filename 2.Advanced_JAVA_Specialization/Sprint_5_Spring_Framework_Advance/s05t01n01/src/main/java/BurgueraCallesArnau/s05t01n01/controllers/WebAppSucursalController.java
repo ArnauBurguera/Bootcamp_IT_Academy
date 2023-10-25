@@ -88,8 +88,17 @@ public class WebAppSucursalController {
         model.addAttribute("sucursals", sucursalDTOs);
         return "sucursal-list";
     }
+
     @GetMapping("/about")
     public String showAbout() {
         return "about";
+    }
+    @GetMapping("/team")
+    public String showTeam() {
+        return "team";
+    }
+    @GetMapping("/contact")
+    public String showContact() {
+        return "contact";
     }
 }
