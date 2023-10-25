@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
+  background-color: #f0f0f0;
+}
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+}
+
+
+    </style>
+
+</head>
+<body>
+<div class="w3-content w3-container w3-padding-64">
+    <div class="w3-col m8 w3-panel" style="margin: 0 auto; width: 100%;">
+        <h2 style="text-align: center;"><strong>Delete Sucursal</strong></h2>
+        <h4 style="text-align: center;"><strong>Are you sure you want to delete the following Sucursal?</strong></h4>
+        <p style="text-align: center;">Name: <span th:text="${sucursal.nomSucursal}"></span></p>
+        <p style="text-align: center;">Country: <span th:text="${sucursal.paisSucursal}"></span></p>
+
+        <form method="post" th:action="@{'/sucursal/delete/' + ${sucursal.pk_SucursalID}}" style="text-align: center;">
+            <button class="w3-button w3-black" type="submit">Confirm</button>
+        </form>
+
+        <div style="text-align:center">
+            <a th:href="@{/sucursal/list}">Cancel</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
