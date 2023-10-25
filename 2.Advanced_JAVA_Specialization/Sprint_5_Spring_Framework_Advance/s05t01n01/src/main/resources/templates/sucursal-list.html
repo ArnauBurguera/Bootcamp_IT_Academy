@@ -69,7 +69,7 @@ body, html {
             <i class="fa fa-bars"></i>
         </a>
         <a href="#home" class="w3-bar-item w3-button">HOME</a>
-        <a href="#about" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
+        <a th:href="@{/sucursal/about}" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
         <a href="#portfolio" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> PORTFOLIO</a>
         <a href="#contact" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
@@ -88,7 +88,7 @@ body, html {
 
 
 
-<!-- First Parallax Image with Logo Text -->
+<!-- Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home"
      style="background-image: url('/images/Casetes de fusta.jpg');">
     <div class="w3-display-middle" style="white-space:nowrap;">
@@ -97,6 +97,7 @@ body, html {
     </div>
 </div>
 
+<!-- Table -->
 <h3 style="text-align: center;">SUCURSALS</h3>
 <table>
     <tr>
@@ -112,8 +113,8 @@ body, html {
         <td th:text="${sucursal.paisSucursal}"></td>
         <td th:text="${sucursal.tipusSucursal}"></td>
         <td>
-            <a th:href="@{'/sucursal/update/' + ${sucursal.pk_SucursalID}}">Update</a>
-            <a th:href="@{'/sucursal/delete/' + ${sucursal.pk_SucursalID}}">Delete</a>
+            <a class="w3-button w3-blue w3-round" th:href="@{'/sucursal/update/' + ${sucursal.pk_SucursalID}}">Update</a>
+            <a class="w3-button w3-red w3-round" th:href="@{'/sucursal/delete/' + ${sucursal.pk_SucursalID}}">Delete</a>
         </td>
     </tr>
 </table>

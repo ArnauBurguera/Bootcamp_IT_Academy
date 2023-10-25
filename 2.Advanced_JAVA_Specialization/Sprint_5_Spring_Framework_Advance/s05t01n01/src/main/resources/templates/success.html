@@ -29,14 +29,13 @@ body, html {
 <body style="text-align: center;">
 <div class="container-fluid ">
     <br>
-    <h1 th:text="${title}"></h1>
+    <h1 th:text="${title}" style="font-weight: bold;"></h1>
     <br>
 </div>
 
-<a th:href="@{/sucursal/home}">Go to Home</a>
+<h3 class="thank-you-message">Thank you for your cooperation!</h3>
 
-<button th:href="@{/sucursal/home}" class="w3-button w3-black" type="submit">Go to Home</button>
-
+<a class="w3-button w3-black" th:href="@{/sucursal/home}">Go to Home</a>
 
 </body>
 
