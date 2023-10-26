@@ -1,1 +1,1 @@
-# Web CRUD App with SQL (SpringBoot - Thymeleaf - W3)
+# Web App CRUD with SQL (SpringBoot - Thymeleaf - W3)
