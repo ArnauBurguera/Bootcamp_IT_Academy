@@ -14,4 +14,4 @@ This is web app made for managing company branches (creating, updating and delet
 ![Team page](src/main/resources/static/images/Team.png)
 
 ## CONTACT
-![Contact page](src/main/resources/static/images/contact.png)
+![Contact page](src/main/resources/static/images/Contact.png)
