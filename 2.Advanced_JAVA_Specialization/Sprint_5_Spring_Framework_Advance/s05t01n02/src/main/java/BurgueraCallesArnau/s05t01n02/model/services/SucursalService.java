@@ -1,10 +1,9 @@
-package BurgueraCallesArnau.s05t01n01.model.services;
+package BurgueraCallesArnau.s05t01n02.model.services;
 
-import BurgueraCallesArnau.s05t01n01.model.domain.Sucursal;
-import BurgueraCallesArnau.s05t01n01.model.dto.SucursalDTO;
+import BurgueraCallesArnau.s05t01n02.model.domain.Sucursal;
+import BurgueraCallesArnau.s05t01n02.model.dto.SucursalDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface SucursalService {
 

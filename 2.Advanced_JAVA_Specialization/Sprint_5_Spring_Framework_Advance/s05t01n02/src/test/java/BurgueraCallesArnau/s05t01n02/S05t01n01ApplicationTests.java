@@ -1,4 +1,4 @@
-package BurgueraCallesArnau.s05t01n01;
+package BurgueraCallesArnau.s05t01n02;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

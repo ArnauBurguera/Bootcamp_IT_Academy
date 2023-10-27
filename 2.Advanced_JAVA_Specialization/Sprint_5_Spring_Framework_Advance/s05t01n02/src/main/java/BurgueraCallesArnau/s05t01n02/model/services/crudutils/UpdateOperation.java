@@ -1,13 +1,11 @@
-package BurgueraCallesArnau.s05t01n01.model.services.crudutils;
+package BurgueraCallesArnau.s05t01n02.model.services.crudutils;
 
-import BurgueraCallesArnau.s05t01n01.model.domain.Sucursal;
-import BurgueraCallesArnau.s05t01n01.model.dto.SucursalDTO;
-import BurgueraCallesArnau.s05t01n01.model.repository.SucursalRepository;
-import BurgueraCallesArnau.s05t01n01.model.services.crudutils.Conversion;
+import BurgueraCallesArnau.s05t01n02.model.domain.Sucursal;
+import BurgueraCallesArnau.s05t01n02.model.dto.SucursalDTO;
+import BurgueraCallesArnau.s05t01n02.model.repository.SucursalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 @Component

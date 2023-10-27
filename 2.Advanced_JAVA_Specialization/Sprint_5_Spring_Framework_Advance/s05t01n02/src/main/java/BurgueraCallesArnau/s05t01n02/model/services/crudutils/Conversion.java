@@ -1,8 +1,8 @@
-package BurgueraCallesArnau.s05t01n01.model.services.crudutils;
+package BurgueraCallesArnau.s05t01n02.model.services.crudutils;
 
-import BurgueraCallesArnau.s05t01n01.model.config.Constants;
-import BurgueraCallesArnau.s05t01n01.model.domain.Sucursal;
-import BurgueraCallesArnau.s05t01n01.model.dto.SucursalDTO;
+import BurgueraCallesArnau.s05t01n02.model.config.Constants;
+import BurgueraCallesArnau.s05t01n02.model.domain.Sucursal;
+import BurgueraCallesArnau.s05t01n02.model.dto.SucursalDTO;
 
 public class Conversion {
 

@@ -1,4 +1,4 @@
-package BurgueraCallesArnau.s05t01n01.model.domain;
+package BurgueraCallesArnau.s05t01n02.model.domain;
 
 import jakarta.persistence.*;
 

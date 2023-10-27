@@ -1,4 +1,4 @@
-package BurgueraCallesArnau.s05t01n01.model.dto;
+package BurgueraCallesArnau.s05t01n02.model.dto;
 
 public class SucursalDTO {
     private Integer pk_SucursalID;
