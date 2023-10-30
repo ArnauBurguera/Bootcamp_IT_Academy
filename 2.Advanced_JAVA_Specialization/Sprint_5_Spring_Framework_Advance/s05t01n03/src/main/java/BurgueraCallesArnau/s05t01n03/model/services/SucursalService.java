@@ -1,8 +1,12 @@
 package BurgueraCallesArnau.s05t01n03.model.services;
 
+import BurgueraCallesArnau.s05t01n03.model.domain.Sucursal;
+import BurgueraCallesArnau.s05t01n03.model.dto.SucursalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class SucursalService{
@@ -15,43 +19,51 @@ public class SucursalService{
         this.webClientBuilder = webClientBuilder;
     }
 
-    /*@Override
-    public SucursalDTO convertToDTO(Sucursal sucursal) {
-        return Conversion.convertToDTO(sucursal);
+    public Mono<Sucursal> createSucursal(Sucursal sucursal) {
+        return webClientBuilder
+                .build()
+                .post()
+                .uri("/add") // Endpoint for creating a Sucursal in the existing API
+                .body(Mono.just(sucursal), Sucursal.class)
+                .retrieve()
+                .bodyToMono(Sucursal.class);
     }
 
-    @Override
-    public Sucursal createSucursal(Sucursal sucursal) {
-        Validation.validateSucursalToPersist(sucursal);
-        return sucursalRepository.save(sucursal);
+    public Mono<SucursalDTO> updateSucursal(Sucursal sucursal) {
+        return webClientBuilder
+                .build()
+                .put()
+                .uri("/update") // Endpoint for updating a Sucursal in the existing API
+                .body(Mono.just(sucursal), Sucursal.class)
+                .retrieve()
+                .bodyToMono(SucursalDTO.class);
     }
 
-    @Override
-    public SucursalDTO updateSucursal(Sucursal sucursal) {
-        return UpdateOperation.updateSucursal(sucursal);
+    public Mono<Void> deleteSucursal(Integer id) {
+        return webClientBuilder
+                .build()
+                .delete()
+                .uri("/delete/{id}", id) // Endpoint for deleting a Sucursal by ID
+                .retrieve()
+                .toBodilessEntity()
+                .then();
     }
 
-    @Override
-    public void deleteSucursal(Integer id) {
-        sucursalRepository.deleteById(id);
+    public Flux<SucursalDTO> getAllSucursals() {
+        return webClientBuilder
+                .build()
+                .get()
+                .uri("/getAll") // Endpoint for getting all Sucursals
+                .retrieve()
+                .bodyToFlux(SucursalDTO.class);
     }
 
-    @Override
-    public SucursalDTO getOneSucursal(Integer id) {
-        Sucursal entity = getSucursalById(id);
-        return convertToDTO(entity);
+    public Mono<SucursalDTO> getOneSucursal(Integer id) {
+        return webClientBuilder
+                .build()
+                .get()
+                .uri("/getOne/{id}", id) // Endpoint for getting a specific Sucursal by ID
+                .retrieve()
+                .bodyToMono(SucursalDTO.class);
     }
-    @Override
-    public Sucursal getSucursalById(Integer id) {
-        return sucursalRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Sucursal not found with ID: " + id));
-    }
-
-    @Override
-    public List<SucursalDTO> getAllSucursals() {
-        List<Sucursal> entities = sucursalRepository.findAll();
-        return entities.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }*/
 }
