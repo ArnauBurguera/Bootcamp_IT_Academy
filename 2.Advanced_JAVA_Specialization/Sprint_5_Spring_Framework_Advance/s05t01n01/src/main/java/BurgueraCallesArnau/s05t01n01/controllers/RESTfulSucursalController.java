@@ -18,7 +18,7 @@ public class RESTfulSucursalController {
     private SucursalService sucursalService;
 
     @PostMapping("/add")
-    public ResponseEntity<Sucursal> createSucursal(@RequestParam Sucursal sucursal){
+    public ResponseEntity<Sucursal> createSucursal(@RequestBody Sucursal sucursal){
         Sucursal sucursalCreated = sucursalService.createSucursal(sucursal);
         return new ResponseEntity<>(sucursalCreated, HttpStatus.CREATED);
     }

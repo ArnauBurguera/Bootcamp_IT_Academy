@@ -22,7 +22,7 @@ public class RESTfulSucursalController {
 
     @PostMapping("/add")
     @Operation(summary = "Create a new Sucursal", description = "This API allows you to create a new Sucursal.")
-    public ResponseEntity<Sucursal> createSucursal(@Parameter(description = "The Sucursal object to be created", required = true) @RequestParam Sucursal sucursal) {
+    public ResponseEntity<Sucursal> createSucursal(@Parameter(description = "The Sucursal object to be created", required = true) @RequestBody Sucursal sucursal) {
         Sucursal sucursalCreated = sucursalService.createSucursal(sucursal);
         return new ResponseEntity<>(sucursalCreated, HttpStatus.CREATED);
     }
