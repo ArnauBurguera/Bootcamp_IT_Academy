@@ -1,22 +1,57 @@
 package BurgueraCallesArnau.s05t01n03.model.services;
 
-import BurgueraCallesArnau.s05t01n03.model.domain.Sucursal;
-import BurgueraCallesArnau.s05t01n03.model.dto.SucursalDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.List;
+@Service
+public class SucursalService{
+   /* @Autowired
+    private SucursalRepository sucursalRepository;*/
+   private final WebClient.Builder webClientBuilder;
 
-public interface SucursalService {
+    @Autowired
+    public SucursalService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
 
-    SucursalDTO convertToDTO(Sucursal sucursal);
+    /*@Override
+    public SucursalDTO convertToDTO(Sucursal sucursal) {
+        return Conversion.convertToDTO(sucursal);
+    }
 
-    Sucursal createSucursal(Sucursal sucursal);
+    @Override
+    public Sucursal createSucursal(Sucursal sucursal) {
+        Validation.validateSucursalToPersist(sucursal);
+        return sucursalRepository.save(sucursal);
+    }
 
-    SucursalDTO updateSucursal(Sucursal sucursal);
+    @Override
+    public SucursalDTO updateSucursal(Sucursal sucursal) {
+        return UpdateOperation.updateSucursal(sucursal);
+    }
 
-    void deleteSucursal(Integer id);
+    @Override
+    public void deleteSucursal(Integer id) {
+        sucursalRepository.deleteById(id);
+    }
 
-    SucursalDTO getOneSucursal(Integer id);
-    Sucursal getSucursalById(Integer id);
+    @Override
+    public SucursalDTO getOneSucursal(Integer id) {
+        Sucursal entity = getSucursalById(id);
+        return convertToDTO(entity);
+    }
+    @Override
+    public Sucursal getSucursalById(Integer id) {
+        return sucursalRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Sucursal not found with ID: " + id));
+    }
 
-    List<SucursalDTO> getAllSucursals();
+    @Override
+    public List<SucursalDTO> getAllSucursals() {
+        List<Sucursal> entities = sucursalRepository.findAll();
+        return entities.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }*/
 }
