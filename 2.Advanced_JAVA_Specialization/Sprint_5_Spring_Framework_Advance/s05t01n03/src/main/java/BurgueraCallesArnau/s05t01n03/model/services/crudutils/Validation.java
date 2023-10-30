@@ -1,7 +1,7 @@
-package BurgueraCallesArnau.s05t01n02.model.services.crudutils;
+package BurgueraCallesArnau.s05t01n03.model.services.crudutils;
 
-import BurgueraCallesArnau.s05t01n02.model.config.Constants;
-import BurgueraCallesArnau.s05t01n02.model.domain.Sucursal;
+import BurgueraCallesArnau.s05t01n03.model.config.Constants;
+import BurgueraCallesArnau.s05t01n03.model.domain.Sucursal;
 
 public class Validation {
     public static void validateSucursalToPersist(Sucursal sucursal) {

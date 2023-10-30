@@ -1,4 +1,4 @@
-package BurgueraCallesArnau.s05t01n02.model.config;
+package BurgueraCallesArnau.s05t01n03.model.config;
 
 import java.util.List;
 

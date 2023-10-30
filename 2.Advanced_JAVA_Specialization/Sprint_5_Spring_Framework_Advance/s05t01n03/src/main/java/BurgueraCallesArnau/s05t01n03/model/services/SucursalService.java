@@ -1,7 +1,7 @@
-package BurgueraCallesArnau.s05t01n02.model.services;
+package BurgueraCallesArnau.s05t01n03.model.services;
 
-import BurgueraCallesArnau.s05t01n02.model.domain.Sucursal;
-import BurgueraCallesArnau.s05t01n02.model.dto.SucursalDTO;
+import BurgueraCallesArnau.s05t01n03.model.domain.Sucursal;
+import BurgueraCallesArnau.s05t01n03.model.dto.SucursalDTO;
 
 import java.util.List;
 

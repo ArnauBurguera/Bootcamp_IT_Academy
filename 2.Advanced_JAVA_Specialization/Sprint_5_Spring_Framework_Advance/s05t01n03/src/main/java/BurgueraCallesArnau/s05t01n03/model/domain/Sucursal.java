@@ -1,16 +1,27 @@
-package BurgueraCallesArnau.s05t01n02.model.dto;
+package BurgueraCallesArnau.s05t01n03.model.domain;
 
-public class SucursalDTO {
+import jakarta.persistence.*;
+
+@Entity
+public class Sucursal {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pk_SucursalID;
     private String nomSucursal;
     private String paisSucursal;
-    private String tipusSucursal;
 
-    public SucursalDTO(Integer pk_SucursalID, String nomSucursal, String paisSucursal, String tipusSucursal) {
-        this.pk_SucursalID = pk_SucursalID;
+    public Sucursal() {
+    }
+
+    public Sucursal(String nomSucursal, String paisSucursal) {
         this.nomSucursal = nomSucursal;
         this.paisSucursal = paisSucursal;
-        this.tipusSucursal = tipusSucursal;
+    }
+
+    public Sucursal(Integer id, String nom, String pais) {
+        this.pk_SucursalID = id;
+        this.nomSucursal = nom;
+        this.paisSucursal = pais;
     }
 
     public Integer getPk_SucursalID() {
@@ -37,11 +48,12 @@ public class SucursalDTO {
         this.paisSucursal = paisSucursal;
     }
 
-    public String getTipusSucursal() {
-        return tipusSucursal;
-    }
-
-    public void setTipusSucursal(String tipusSucursal) {
-        this.tipusSucursal = tipusSucursal;
+    @Override
+    public String toString() {
+        return "Sucursal{" +
+                "pk_SucursalID=" + pk_SucursalID +
+                ", nomSucursal='" + nomSucursal + '\'' +
+                ", paisSucursal='" + paisSucursal + '\'' +
+                '}';
     }
 }

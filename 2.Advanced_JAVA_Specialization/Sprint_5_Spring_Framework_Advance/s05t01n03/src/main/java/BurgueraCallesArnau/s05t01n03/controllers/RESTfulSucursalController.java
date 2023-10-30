@@ -1,8 +1,8 @@
-package BurgueraCallesArnau.s05t01n02.controllers;
+package BurgueraCallesArnau.s05t01n03.controllers;
 
-import BurgueraCallesArnau.s05t01n02.model.domain.Sucursal;
-import BurgueraCallesArnau.s05t01n02.model.dto.SucursalDTO;
-import BurgueraCallesArnau.s05t01n02.model.services.SucursalService;
+import BurgueraCallesArnau.s05t01n03.model.domain.Sucursal;
+import BurgueraCallesArnau.s05t01n03.model.dto.SucursalDTO;
+import BurgueraCallesArnau.s05t01n03.model.services.SucursalService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
