@@ -1,8 +1,9 @@
-# Api REST CRUD with SQL (SpringBoot - Swagger)
+# Api client to Api Server (SpringBoot - WebClient)
 
-This is an API REST for managing company branches (creating, updating and deleting them) created with SpringBoot and an SQL db and Swagger was used as ui.
+Reactive Api built using Spring Webflux and WebClient to send requests to the Api in s05t01n02.
 
-![Swagger](src/main/resources/images/Swagger_ui.png)
+## CREATE
+![Postamn_Create](src/main/resources/images/Create.jpg)
 
 ## PUT
 ![Swagger](src/main/resources/images/Put.png)
