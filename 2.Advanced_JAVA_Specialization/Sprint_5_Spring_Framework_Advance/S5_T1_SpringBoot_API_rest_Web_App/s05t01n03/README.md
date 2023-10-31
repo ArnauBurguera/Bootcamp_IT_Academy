@@ -5,14 +5,13 @@ Reactive Api built using Spring Webflux and WebClient to send requests to the Ap
 ## CREATE
 ![Postamn_Create](src/main/resources/images/Create.jpg)
 
-## PUT
-![Swagger](src/main/resources/images/Put.png)
+## UPDATE
+![Postamn_Update](src/main/resources/images/Update.jpg)
 
-## POST
-![Swagger](src/main/resources/images/Post.png)
+## Get One
+![Postamn_Get_One](src/main/resources/images/Get_One.jpg)
 
-## GET
-![Swagger](src/main/resources/images/Get.png)
+## GET All
+![Postamn_Get_All](src/main/resources/images/Get_all.jpg)
 
-## DELETE
-![Swagger](src/main/resources/images/Delete.png)
+
