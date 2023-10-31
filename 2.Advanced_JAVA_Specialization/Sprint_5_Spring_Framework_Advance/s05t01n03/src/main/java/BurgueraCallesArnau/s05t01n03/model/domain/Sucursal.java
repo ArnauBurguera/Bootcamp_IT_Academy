@@ -1,11 +1,8 @@
 package BurgueraCallesArnau.s05t01n03.model.domain;
 
-import jakarta.persistence.*;
 
-@Entity
 public class Sucursal {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer pk_SucursalID;
     private String nomSucursal;
     private String paisSucursal;
