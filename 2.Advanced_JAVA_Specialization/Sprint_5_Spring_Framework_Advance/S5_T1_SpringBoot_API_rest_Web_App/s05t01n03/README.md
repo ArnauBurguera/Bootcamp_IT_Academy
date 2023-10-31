@@ -12,6 +12,6 @@ Reactive Api built using Spring Webflux and WebClient to send requests to the Ap
 ![Postamn_Get_One](src/main/resources/images/Get_One.jpg)
 
 ## GET All
-![Postamn_Get_All](src/main/resources/images/Get_all.jpg)
+![Postamn_Get_All](src/main/resources/images/Get_all.png)
 
 
