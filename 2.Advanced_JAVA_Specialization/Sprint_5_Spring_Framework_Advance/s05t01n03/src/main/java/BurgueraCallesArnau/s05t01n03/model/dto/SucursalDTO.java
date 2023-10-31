@@ -5,6 +5,8 @@ public class SucursalDTO {
     private String nomSucursal;
     private String paisSucursal;
     private String tipusSucursal;
+    public SucursalDTO() {
+    }
 
     public SucursalDTO(Integer pk_SucursalID, String nomSucursal, String paisSucursal, String tipusSucursal) {
         this.pk_SucursalID = pk_SucursalID;

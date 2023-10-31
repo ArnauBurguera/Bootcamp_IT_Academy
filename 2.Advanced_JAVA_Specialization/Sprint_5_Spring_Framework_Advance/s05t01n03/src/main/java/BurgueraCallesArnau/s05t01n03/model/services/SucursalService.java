@@ -29,14 +29,14 @@ public class SucursalService{
                 .bodyToMono(Sucursal.class);
     }
 
-    public Mono<SucursalDTO> updateSucursal(Sucursal sucursal) {
+    public Mono<Sucursal> updateSucursal(Sucursal sucursal) {
         return webClientBuilder
                 .build()
                 .put()
                 .uri("/update") // Endpoint for updating a Sucursal in the existing API
                 .body(Mono.just(sucursal), Sucursal.class)
                 .retrieve()
-                .bodyToMono(SucursalDTO.class);
+                .bodyToMono(Sucursal.class);
     }
 
     public Mono<Void> deleteSucursal(Integer id) {
@@ -64,6 +64,7 @@ public class SucursalService{
                 .get()
                 .uri("/getOne/{id}", id) // Endpoint for getting a specific Sucursal by ID
                 .retrieve()
-                .bodyToMono(SucursalDTO.class);
+                .toEntity(SucursalDTO.class) // Use toEntity to get ResponseEntity
+                .flatMap(responseEntity -> Mono.justOrEmpty(responseEntity.getBody())); // Map to Mono<SucursalDTO>
     }
 }

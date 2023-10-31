@@ -8,7 +8,6 @@ public class S05t01n03Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(S05t01n03Application.class, args);
-		//http://localhost:9001/swagger-ui/index.html
 	}
 
 }

@@ -26,7 +26,7 @@ public class SucursalController {
     }
 
     @PutMapping("/update")
-    public Mono<SucursalDTO> updateSucursal(@RequestBody Sucursal sucursal) {
+    public Mono<Sucursal> updateSucursal(@RequestBody Sucursal sucursal) {
         return sucursalService.updateSucursal(sucursal);
     }
 
@@ -40,7 +40,7 @@ public class SucursalController {
         return sucursalService.getAllSucursals();
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/getOne/{id}")
     public Mono<SucursalDTO> getOneSucursal(@PathVariable Integer id) {
         return sucursalService.getOneSucursal(id);
     }
