@@ -5,13 +5,13 @@ This is an API REST for managing company branches (creating, updating and deleti
 ![Swagger](src/main/resources/images/Swagger_ui.png)
 
 ## PUT
-![Swagger](src/main/resources/images/Put.png)
+![Swagger_PUT](src/main/resources/images/Put.png)
 
 ## POST
-![Swagger](src/main/resources/images/Post.png)
+![Swagger_POST](src/main/resources/images/Post.png)
 
 ## GET
-![Swagger](src/main/resources/images/Get.png)
+![Swagger_GET](src/main/resources/images/Get.png)
 
 ## DELETE
-![Swagger](src/main/resources/images/Delete.png)
+![Swagger_DELETE](src/main/resources/images/Delete.png)
