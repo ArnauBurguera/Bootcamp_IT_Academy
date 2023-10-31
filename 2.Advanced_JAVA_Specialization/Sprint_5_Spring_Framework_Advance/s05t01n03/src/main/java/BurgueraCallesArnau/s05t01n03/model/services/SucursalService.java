@@ -64,7 +64,6 @@ public class SucursalService{
                 .get()
                 .uri("/getOne/{id}", id) // Endpoint for getting a specific Sucursal by ID
                 .retrieve()
-                .toEntity(SucursalDTO.class) // Use toEntity to get ResponseEntity
-                .flatMap(responseEntity -> Mono.justOrEmpty(responseEntity.getBody())); // Map to Mono<SucursalDTO>
+                .bodyToMono(SucursalDTO.class);
     }
 }
