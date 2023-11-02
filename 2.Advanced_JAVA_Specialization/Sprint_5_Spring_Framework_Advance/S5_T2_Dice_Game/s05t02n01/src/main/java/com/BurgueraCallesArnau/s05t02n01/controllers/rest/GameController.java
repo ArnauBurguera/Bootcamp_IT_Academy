@@ -1,4 +1,4 @@
-package com.BurgueraCallesArnau.s05t02n01.controllers;
+package com.BurgueraCallesArnau.s05t02n01.controllers.rest;
 
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import org.springframework.http.ResponseEntity;
