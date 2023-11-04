@@ -1,6 +1,8 @@
 package com.BurgueraCallesArnau.s05t02n01.service;
 
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
+import com.BurgueraCallesArnau.s05t02n01.repository.GameRepository;
+import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,11 +10,11 @@ import java.util.List;
 
 @Service
 public class PlayerService {
-    /*@Autowired
+    @Autowired
     private PlayerRepository playerRepository;
 
     @Autowired
-    private GameRepository gameRepository;*/
+    private GameRepository gameRepository;
 
     public Player createPlayer(Player player) {
         // Implementation to create a new player

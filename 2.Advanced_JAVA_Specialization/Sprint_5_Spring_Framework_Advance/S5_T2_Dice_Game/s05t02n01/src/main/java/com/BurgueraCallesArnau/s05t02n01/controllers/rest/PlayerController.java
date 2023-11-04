@@ -1,6 +1,8 @@
 package com.BurgueraCallesArnau.s05t02n01.controllers.rest;
 
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
+import com.BurgueraCallesArnau.s05t02n01.service.PlayerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/players")
 public class PlayerController {
+
+    @Autowired
+    private PlayerService playerService;
 
     @PostMapping
     public ResponseEntity<Player> createPlayer(@RequestBody Player player) {
