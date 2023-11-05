@@ -33,29 +33,26 @@ public class GameService {
         game.setWon(won);
 
         // Find the player by id
-        Player player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new EntityNotFoundException("Player not found"));
+        Player player = findPlayer(playerId);
+        player.addGame(game);
+        playerRepository.save(player);
 
-        // Set the player for the game and save it to the database
-        game.setPlayer(player);
-        return gameRepository.save(game);
+        return game;
     }
 
-    public void deleteGamesForPlayer(Integer playerId) {
-        // Find the player by id
-        Player player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new EntityNotFoundException("Player not found"));
 
-        // Delete all game records associated with the player
-        gameRepository.deleteByPlayer(player);
+
+    public void deleteGamesForPlayer(Integer playerId) {
+        Player player = findPlayer(playerId);
+        gameRepository.deleteAll(player.getGames());
     }
 
     public List<Game> getGamesForPlayer(Integer playerId) {
-        // Find the player by id
-        Player player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new EntityNotFoundException("Player not found"));
+        return findPlayer(playerId).getGames();
+    }
 
-        // Retrieve all game records for the player
-        return player.getGames();
+    private Player findPlayer(Integer playerId){
+        return playerRepository.findById(playerId)
+                .orElseThrow(() -> new EntityNotFoundException("Player not found"));
     }
 }

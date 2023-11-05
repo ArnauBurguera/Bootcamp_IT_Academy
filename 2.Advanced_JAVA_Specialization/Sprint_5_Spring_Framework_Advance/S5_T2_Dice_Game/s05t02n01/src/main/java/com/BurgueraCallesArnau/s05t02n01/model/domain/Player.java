@@ -28,4 +28,12 @@ public class Player {
         this.registrationDate = Calendar.getInstance().getTime();
         this.games = new ArrayList<>();
     }
+    public void addGame(Game game) {
+        games.add(game);
+        game.setPlayer(this);
+    }
+
+    public void removeGame(Game game) {
+        games.remove(game);
+    }
 }

@@ -16,4 +16,7 @@ public class Game {
     private int dice1;
     private int dice2;
     private boolean won;
+
+    @ManyToOne
+    private Player player;
 }
