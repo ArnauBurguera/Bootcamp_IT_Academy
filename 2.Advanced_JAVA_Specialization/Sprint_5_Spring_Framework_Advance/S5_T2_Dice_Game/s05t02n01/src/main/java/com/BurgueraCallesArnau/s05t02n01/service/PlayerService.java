@@ -5,6 +5,7 @@ import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
 
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -82,38 +83,20 @@ public class PlayerService {
             return null;
         }
 
-        Player loser = players.get(0); // We assume the first player is the loser.
-        double minSuccessPercentage = calculateSuccessPercentage(loser.getId());
-
-        for (Player player : players) {
-            double successPercentage = calculateSuccessPercentage(player.getId());
-            if (successPercentage < minSuccessPercentage) {
-                minSuccessPercentage = successPercentage;
-                loser = player;
-            }
-        }
-
-        return loser;
+        return players.stream()
+                .min(Comparator.comparingDouble(player -> calculateSuccessPercentage(player.getId())))
+                .orElse(null);
     }
 
     public Player getWinner() {
         List<Player> players = getAllPlayers();
         if (players.isEmpty()) {
-            return null; // No players in the system.
+            return null; 
         }
 
-        Player winner = players.get(0); // Assume the first player is the winner.
-        double maxSuccessPercentage = calculateSuccessPercentage(winner.getId());
-
-        for (Player player : players) {
-            double successPercentage = calculateSuccessPercentage(player.getId());
-            if (successPercentage > maxSuccessPercentage) {
-                maxSuccessPercentage = successPercentage;
-                winner = player;
-            }
-        }
-
-        return winner;
+        return players.stream()
+                .max(Comparator.comparingDouble(player -> calculateSuccessPercentage(player.getId())))
+                .orElse(null);
     }
 
     public void deletePlayer(int playerId) {
