@@ -23,13 +23,13 @@ public class PlayerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayer);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Player> updatePlayerName(@PathVariable int id, @RequestBody String name) {
         Player updatedPlayer = playerService.updatePlayerName(id, name);
         return ResponseEntity.ok(updatedPlayer);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletePlayer(@PathVariable int id) {
         playerService.deletePlayer(id);
         return ResponseEntity.ok("Player has been deleted.");
