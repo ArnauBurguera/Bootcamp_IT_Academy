@@ -16,7 +16,6 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-
     @PostMapping("/play")
     public ResponseEntity<Game> playGame(@PathVariable int playerId) {
         Game game = gameService.playGame(playerId);
@@ -25,7 +24,9 @@ public class GameController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteGamesForPlayer(@PathVariable int playerId) {
+        //gameService.findPlayer(playerId).deleteAllGames();
         gameService.deleteGamesForPlayer(playerId);
+
         return ResponseEntity.ok("All games for the player have been deleted.");
     }
 

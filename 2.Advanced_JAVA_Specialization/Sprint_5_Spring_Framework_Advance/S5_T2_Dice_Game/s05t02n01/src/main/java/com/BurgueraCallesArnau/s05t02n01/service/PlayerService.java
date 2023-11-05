@@ -76,6 +76,46 @@ public class PlayerService {
         return players;
     }
 
+    public Player getLoser() {
+        List<Player> players = getAllPlayers();
+        if (players.isEmpty()) {
+            return null;
+        }
+
+        Player loser = players.get(0); // We assume the first player is the loser.
+        double minSuccessPercentage = calculateSuccessPercentage(loser.getId());
+
+        for (Player player : players) {
+            double successPercentage = calculateSuccessPercentage(player.getId());
+            if (successPercentage < minSuccessPercentage) {
+                minSuccessPercentage = successPercentage;
+                loser = player;
+            }
+        }
+
+        return loser;
+    }
+
+    public Player getWinner() {
+        List<Player> players = getAllPlayers();
+        if (players.isEmpty()) {
+            return null; // No players in the system.
+        }
+
+        Player winner = players.get(0); // Assume the first player is the winner.
+        double maxSuccessPercentage = calculateSuccessPercentage(winner.getId());
+
+        for (Player player : players) {
+            double successPercentage = calculateSuccessPercentage(player.getId());
+            if (successPercentage > maxSuccessPercentage) {
+                maxSuccessPercentage = successPercentage;
+                winner = player;
+            }
+        }
+
+        return winner;
+    }
+
     public void deletePlayer(int playerId) {
         playerRepository.delete(gameService.findPlayer(playerId));
     }

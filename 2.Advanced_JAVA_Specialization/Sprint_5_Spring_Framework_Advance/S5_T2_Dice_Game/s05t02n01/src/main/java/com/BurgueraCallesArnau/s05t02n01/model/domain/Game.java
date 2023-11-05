@@ -19,6 +19,7 @@ public class Game {
     private boolean won;
 
     @ManyToOne
+    @JoinColumn(name = "player_Id")
     @JsonBackReference//If i don't do this Circular reference in JSON serialization
     private Player player;
 

@@ -38,7 +38,8 @@ public class GameService {
 
     public void deleteGamesForPlayer(Integer playerId) {
         Player player = findPlayer(playerId);
-        gameRepository.deleteAll(player.getGames());
+        player.deleteAllGames();
+        playerRepository.save(player);
     }
 
     public List<Game> getGamesForPlayer(Integer playerId) {

@@ -16,6 +16,7 @@ import java.util.List;
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "player_Id")
     private int id;
     private String name;
     private Date registrationDate;
@@ -33,7 +34,7 @@ public class Player {
         game.setPlayer(this);
     }
 
-    public void removeGame(Game game) {
-        games.remove(game);
+    public void deleteAllGames(){
+        games.clear();
     }
 }

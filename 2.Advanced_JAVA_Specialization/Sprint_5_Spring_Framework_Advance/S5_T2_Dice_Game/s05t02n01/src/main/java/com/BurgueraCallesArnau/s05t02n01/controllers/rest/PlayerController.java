@@ -64,4 +64,22 @@ public class PlayerController {
         List<Player> ranking = playerService.getPlayersRankedBySuccessPercentage();
         return ResponseEntity.ok(ranking);
     }
+
+    @GetMapping("/ranking/loser")
+    public ResponseEntity<Player> getLoser() {
+        Player loser = playerService.getLoser();
+        if (loser == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(loser);
+    }
+
+    @GetMapping("/ranking/winner")
+    public ResponseEntity<Player> getWinner() {
+        Player winner = playerService.getWinner();
+        if (winner == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(winner);
+    }
 }
