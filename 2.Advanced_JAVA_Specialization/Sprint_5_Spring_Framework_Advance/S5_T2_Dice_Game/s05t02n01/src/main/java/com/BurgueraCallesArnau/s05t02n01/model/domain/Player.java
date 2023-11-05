@@ -25,7 +25,6 @@ public class Player {
 
     public Player(String name){
         this.name = name;
-        this.registrationDate = Calendar.getInstance().getTime();
         this.games = new ArrayList<>();
     }
     public void addGame(Game game) {

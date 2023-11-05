@@ -45,7 +45,7 @@ public class GameService {
         return findPlayer(playerId).getGames();
     }
 
-    private Player findPlayer(Integer playerId){
+    public Player findPlayer(Integer playerId){
         return playerRepository.findById(playerId)
                 .orElseThrow(() -> new EntityNotFoundException("Player not found"));
     }
