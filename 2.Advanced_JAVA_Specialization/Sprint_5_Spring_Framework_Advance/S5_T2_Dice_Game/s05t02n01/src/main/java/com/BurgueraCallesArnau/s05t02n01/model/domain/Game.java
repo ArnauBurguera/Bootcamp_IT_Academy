@@ -1,5 +1,6 @@
 package com.BurgueraCallesArnau.s05t02n01.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class Game {
     private boolean won;
 
     @ManyToOne
+    @JsonBackReference//If i don't do this Circular reference in JSON serialization
     private Player player;
 
     public Game(int dice1, int dice2, Boolean won){
