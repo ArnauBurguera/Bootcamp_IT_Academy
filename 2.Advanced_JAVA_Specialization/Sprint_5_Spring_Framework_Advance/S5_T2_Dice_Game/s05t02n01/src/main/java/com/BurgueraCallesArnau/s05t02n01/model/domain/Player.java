@@ -3,6 +3,8 @@ package com.BurgueraCallesArnau.s05t02n01.model.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +13,6 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +20,12 @@ public class Player {
     private String name;
     private Date registrationDate;
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Game> games;
+
+    public Player(String name){
+        this.name = name;
+        this.registrationDate = Calendar.getInstance().getTime();
+        this.games = new ArrayList<>();
+    }
 }
