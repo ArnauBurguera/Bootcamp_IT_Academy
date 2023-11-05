@@ -19,4 +19,10 @@ public class Game {
 
     @ManyToOne
     private Player player;
+
+    public Game(int dice1, int dice2, Boolean won){
+        this.dice1 = dice1;
+        this.dice2 = dice2;
+        this.won = won;
+    }
 }

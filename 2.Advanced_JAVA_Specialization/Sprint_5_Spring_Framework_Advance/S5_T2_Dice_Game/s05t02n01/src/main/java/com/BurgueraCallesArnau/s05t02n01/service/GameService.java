@@ -19,20 +19,8 @@ public class GameService {
     private PlayerRepository playerRepository;
 
     public Game playGame(Integer playerId) {
-        // Simulate dice roll (you can use a random number generator)
-        int dice1 = (int) (Math.random() * 6) + 1;
-        int dice2 = (int) (Math.random() * 6) + 1;
+        Game game = rollDice();
 
-        // Determine if the game is won based on the sum of dice
-        boolean won = (dice1 + dice2 == 7);
-
-        // Create a new game record
-        Game game = new Game();
-        game.setDice1(dice1);
-        game.setDice2(dice2);
-        game.setWon(won);
-
-        // Find the player by id
         Player player = findPlayer(playerId);
         player.addGame(game);
         playerRepository.save(player);
@@ -40,7 +28,13 @@ public class GameService {
         return game;
     }
 
+    private Game rollDice(){
+        int dice1 = (int) (Math.random() * 6) + 1;
+        int dice2 = (int) (Math.random() * 6) + 1;
+        boolean won = (dice1 + dice2 == 7);
 
+        return new Game(dice1,dice2,won);
+    }
 
     public void deleteGamesForPlayer(Integer playerId) {
         Player player = findPlayer(playerId);

@@ -4,6 +4,8 @@ import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
 import java.util.Date;
+
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +28,12 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
-   /* public Player updatePlayerName(Integer id, String name) {
+    public Player updatePlayerName(Integer id, String name) {
         Player player = playerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Player not found"));
         player.setName(name);
         return playerRepository.save(player);
-    }*/
+    }
 
     public List<Player> getAllPlayers() {
         return playerRepository.findAll();
