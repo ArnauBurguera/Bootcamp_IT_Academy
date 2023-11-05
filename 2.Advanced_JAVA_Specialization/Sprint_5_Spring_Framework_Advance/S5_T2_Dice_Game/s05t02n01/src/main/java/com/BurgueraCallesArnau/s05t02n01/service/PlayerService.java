@@ -63,4 +63,20 @@ public class PlayerService {
                 .sum();
         return totalPercentage / players.size();
     }
+
+    public List<Player> getPlayersRankedBySuccessPercentage() {
+        List<Player> players = getAllPlayers();
+
+        players.sort((player1, player2) -> {
+            double successPercentage1 = calculateSuccessPercentage(player1.getId());
+            double successPercentage2 = calculateSuccessPercentage(player2.getId());
+            return Double.compare(successPercentage2, successPercentage1);
+        });
+
+        return players;
+    }
+
+    public void deletePlayer(int playerId) {
+        playerRepository.delete(gameService.findPlayer(playerId));
+    }
 }
