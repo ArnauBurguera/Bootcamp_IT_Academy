@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/players/{playerId}/games")
+@Tag(name = "Sucursal Management", description = "Operations pertaining to Sucursal Management")
 public class GameController {
 
     @Autowired
@@ -24,7 +26,6 @@ public class GameController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteGamesForPlayer(@PathVariable int playerId) {
-        //gameService.findPlayer(playerId).deleteAllGames();
         gameService.deleteGamesForPlayer(playerId);
 
         return ResponseEntity.ok("All games for the player have been deleted.");

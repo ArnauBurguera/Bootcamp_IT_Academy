@@ -91,7 +91,7 @@ public class PlayerService {
     public Player getWinner() {
         List<Player> players = getAllPlayers();
         if (players.isEmpty()) {
-            return null; 
+            return null;
         }
 
         return players.stream()
