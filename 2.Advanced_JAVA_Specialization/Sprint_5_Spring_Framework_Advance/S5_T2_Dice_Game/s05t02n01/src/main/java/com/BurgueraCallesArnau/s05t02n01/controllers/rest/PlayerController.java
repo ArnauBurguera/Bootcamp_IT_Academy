@@ -3,6 +3,7 @@ package com.BurgueraCallesArnau.s05t02n01.controllers.rest;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.service.PlayerService;
+import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/players")
-@Tag(name = "Dice Game", description = "Operations pertaining to a Dice Game and its player Management")
+@Tag(name = Constants.swaggerTagName, description = Constants.swaggerTagDescription)
 public class PlayerController {
 
     @Autowired
