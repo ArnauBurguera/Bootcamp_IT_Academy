@@ -1,14 +1,12 @@
 package com.BurgueraCallesArnau.s05t02n01.service;
 
+import com.BurgueraCallesArnau.s05t02n01.exceptions.PlayerNameAlreadyUsedException;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
 
 import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
-
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +22,16 @@ public class PlayerService {
     public Player createPlayer(Player player) {
         player.setRegistrationDate(Calendar.getInstance().getTime());
 
-        if (player.getName() == null || player.getName().isEmpty()) {
-            player.setName("ANÒNIM");
-        }
-
         return playerRepository.save(player);
+    }
+
+    private Player checkPlayerName(Player player){
+        if (player.getName() == null || player.getName().isEmpty()) {
+            player.setName("ANONYMOUS");
+        } else if (getAllPlayers().stream().anyMatch(p -> p.getName().equals(player.getName()))) {
+            throw new PlayerNameAlreadyUsedException("Player name already exists in database: " + player.getName());
+        }
+        return player;
     }
 
     public Player updatePlayerName(Integer id, String name) {
