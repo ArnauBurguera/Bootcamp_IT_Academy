@@ -1,5 +1,6 @@
 package com.BurgueraCallesArnau.s05t02n01.service;
 
+import com.BurgueraCallesArnau.s05t02n01.exceptions.PlayerNotFoundException;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.GameRepository;
@@ -48,6 +49,6 @@ public class GameService {
 
     public Player findPlayer(Integer playerId){
         return playerRepository.findById(playerId)
-                .orElseThrow(() -> new EntityNotFoundException("Player not found"));
+                .orElseThrow(() -> new PlayerNotFoundException("Player not found with ID: " + playerId));
     }
 }
