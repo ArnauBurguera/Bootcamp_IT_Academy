@@ -21,17 +21,16 @@ public class PlayerService {
 
     public Player createPlayer(Player player) {
         player.setRegistrationDate(Calendar.getInstance().getTime());
-
+        checkPlayerName(player);
         return playerRepository.save(player);
     }
 
-    private Player checkPlayerName(Player player){
+    private void checkPlayerName(Player player){
         if (player.getName() == null || player.getName().isEmpty()) {
             player.setName("ANONYMOUS");
         } else if (getAllPlayers().stream().anyMatch(p -> p.getName().equals(player.getName()))) {
             throw new PlayerNameAlreadyUsedException("Player name already exists in database: " + player.getName());
         }
-        return player;
     }
 
     public Player updatePlayerName(Integer id, String name) {

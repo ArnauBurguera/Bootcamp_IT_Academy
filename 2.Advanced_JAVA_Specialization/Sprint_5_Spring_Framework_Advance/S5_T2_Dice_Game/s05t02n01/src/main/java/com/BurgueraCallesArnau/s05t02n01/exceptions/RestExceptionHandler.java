@@ -14,8 +14,8 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
-    @ExceptionHandler(PlayerNotFoundException.class)
-    public ResponseEntity<Object> PlayerNameAlreadyUsedException(PlayerNameAlreadyUsedException ex) {
+    @ExceptionHandler(PlayerNameAlreadyUsedException.class)
+    public ResponseEntity<Object> handlePlayerNameAlreadyUsedException(PlayerNameAlreadyUsedException ex) {
         String response = ex.getMessage();
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
