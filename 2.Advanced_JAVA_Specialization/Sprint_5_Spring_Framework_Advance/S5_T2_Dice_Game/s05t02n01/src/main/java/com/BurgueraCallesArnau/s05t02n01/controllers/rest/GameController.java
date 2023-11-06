@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/players/{playerId}/games")
-@Tag(name = "Dice Game", description = "Operations pertaining to a Dice Game and player Management")
 public class GameController {
 
     @Autowired
