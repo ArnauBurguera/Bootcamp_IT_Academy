@@ -5,6 +5,7 @@ import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.GameRepository;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
+import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,6 @@ public class GameService {
 
     public Player findPlayer(Integer playerId){
         return playerRepository.findById(playerId)
-                .orElseThrow(() -> new PlayerNotFoundException("Player not found with ID: " + playerId));
+                .orElseThrow(() -> new PlayerNotFoundException(Constants.PlayerNotFoundExceptionMessage + playerId));
     }
 }

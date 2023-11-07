@@ -56,8 +56,12 @@ public class Constants {
     public static final String deletePlayerResponseBody = "Player has been deleted.";
     public static final String deleteGamesForPlayerResponseBody = "All games for the player have been deleted.";
 
+    //GAME SERVICE
+    public static final String PlayerNotFoundExceptionMessage = "Player not found with ID: ";
 
-
+    //PLAYER SERVICE
+    public static final String playerDefaultName = "ANONYMOUS";
+    public static final String PlayerNameAlreadyUsedExceptionMessage = "Player name already exists in database: ";
 
 
 }

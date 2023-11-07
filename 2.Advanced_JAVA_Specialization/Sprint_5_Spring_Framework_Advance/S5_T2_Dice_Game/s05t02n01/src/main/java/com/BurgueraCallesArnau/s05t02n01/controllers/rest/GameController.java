@@ -29,16 +29,9 @@ public class GameController {
 
     @DeleteMapping(Constants.deleteGamesForPlayer)
     @Operation(summary = Constants.deleteGamesForPlayerSummary, description = Constants.deleteGamesForPlayerDscr)
-    public ResponseEntity<String> deleteGamesForPlayer(@Parameter(description = Constants.deleteGamesForPlayerParam, required = true)@PathVariable int playerId) {
+    public ResponseEntity<String> deleteGamesForPlayer(@Parameter(description = Constants.deleteGamesForPlayerParam, required = true) @PathVariable int playerId) {
         gameService.deleteGamesForPlayer(playerId);
 
         return ResponseEntity.ok(Constants.deleteGamesForPlayerResponseBody);
     }
-
-   /* @GetMapping("/list")
-    @Operation(summary = "List game records for a specific player", description = "This API allows you to list game record for a given player")
-    public ResponseEntity<List<Game>> getPlayerGames(@Parameter(description = "The player id", required = true)@PathVariable int playerId) {
-        List<Game> games = gameService.getGamesForPlayer(playerId);
-        return ResponseEntity.ok(games);
-    }*/
 }

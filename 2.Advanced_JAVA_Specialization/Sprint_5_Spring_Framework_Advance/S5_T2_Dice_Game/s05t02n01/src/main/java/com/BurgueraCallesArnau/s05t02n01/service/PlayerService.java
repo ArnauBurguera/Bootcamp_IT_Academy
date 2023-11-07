@@ -7,6 +7,8 @@ import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
 
 import java.util.Calendar;
 import java.util.Comparator;
+
+import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +29,9 @@ public class PlayerService {
 
     private void checkPlayerName(Player player){
         if (player.getName() == null || player.getName().isEmpty()) {
-            player.setName("ANONYMOUS");
+            player.setName(Constants.playerDefaultName);
         } else if (getAllPlayers().stream().anyMatch(p -> p.getName().equals(player.getName()))) {
-            throw new PlayerNameAlreadyUsedException("Player name already exists in database: " + player.getName());
+            throw new PlayerNameAlreadyUsedException(Constants.PlayerNameAlreadyUsedExceptionMessage + player.getName());
         }
     }
 
