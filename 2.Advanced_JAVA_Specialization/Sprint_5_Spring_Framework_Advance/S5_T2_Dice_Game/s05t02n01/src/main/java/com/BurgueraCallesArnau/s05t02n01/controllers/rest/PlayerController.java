@@ -24,48 +24,48 @@ public class PlayerController {
 
     @PostMapping(Constants.createPlayer)
     @Operation(summary = Constants.createPlayerSummary, description = Constants.createPlayerDescription)
-    public ResponseEntity<Player> createPlayer(@Parameter(description = Constants.createPlayerParamDescr, required = true)@RequestBody Player player) {
+    public ResponseEntity<Player> createPlayer(@Parameter(description = Constants.createPlayerParam, required = true)@RequestBody Player player) {
         Player createdPlayer = playerService.createPlayer(player);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayer);
     }
 
     @PutMapping(Constants.updatePlayerName)
     @Operation(summary = Constants.updatePlayerSummary, description = Constants.updatePlayerDescr)
-    public ResponseEntity<Player> updatePlayerName(@Parameter(description = Constants.updatePlayerParamDescr, required = true)@PathVariable int id, @RequestBody String name) {
+    public ResponseEntity<Player> updatePlayerName(@Parameter(description = Constants.updatePlayerParam, required = true)@PathVariable int id, @RequestBody String name) {
         Player updatedPlayer = playerService.updatePlayerName(id, name);
         return ResponseEntity.ok(updatedPlayer);
     }
 
-    @DeleteMapping("/delete/{id}")
-    @Operation(summary = "Player deletion", description = "This API allows you to delete players.")
-    public ResponseEntity<String> deletePlayer(@Parameter(description = "Player id", required = true)@PathVariable int id) {
+    @DeleteMapping(Constants.deletePlayer)
+    @Operation(summary = Constants.deletePlayerSummary, description = Constants.deletePlayerDescr)
+    public ResponseEntity<String> deletePlayer(@Parameter(description = Constants.deletePlayerParam, required = true)@PathVariable int id) {
         playerService.deletePlayer(id);
-        return ResponseEntity.ok("Player has been deleted.");
+        return ResponseEntity.ok(Constants.deletePlayerResponseBody);
     }
 
-    @GetMapping("/getAll")
-    @Operation(summary = "Player List", description = "This API allows you to list all players.")
+    @GetMapping(Constants.getAllPlayers)
+    @Operation(summary = Constants.getAllPlayersSummary, description = Constants.getAllPlayersDescr)
     public ResponseEntity<List<Player>> getAllPlayers() {
         List<Player> players = playerService.getAllPlayers();
         return ResponseEntity.ok(players);
     }
 
-    @GetMapping("/{id}/games")
-    @Operation(summary = "Player Game Record", description = "This API allows you to list the Game Record of a given Player.")
-    public ResponseEntity<List<Game>> getPlayerGames(@Parameter(description = "Player object", required = true)@PathVariable int id) {
+    @GetMapping(Constants.getPlayerGames)
+    @Operation(summary = Constants.getPlayerGamesSummary, description = Constants.getPlayerGamesDescr)
+    public ResponseEntity<List<Game>> getPlayerGames(@Parameter(description = Constants.getPlayerGamesParam, required = true)@PathVariable int id) {
         List<Game> games = playerService.getPlayerGames(id);
         return ResponseEntity.ok(games);
     }
 
-    @GetMapping("/{id}/successPercentage")
-    @Operation(summary = "Player Success Percentage", description = "This API shows the Success Percentage of a given Player.")
-    public ResponseEntity<Double> calculateSuccessPercentage(@Parameter(description = "Player object", required = true)@PathVariable int id) {
+    @GetMapping(Constants.calculateSuccessPercentage)
+    @Operation(summary = Constants.calculateSuccessPercentageSummary, description = Constants.calculateSuccessPercentageDescr)
+    public ResponseEntity<Double> calculateSuccessPercentage(@Parameter(description = Constants.calculateSuccessPercentageParam, required = true)@PathVariable int id) {
         double successPercentage = playerService.calculateSuccessPercentage(id);
         return ResponseEntity.ok(successPercentage);
     }
 
-    @GetMapping("/averageSuccess")
-    @Operation(summary = "Average Success Percentage", description = "This API shows the Average Success Percentage of all the game history")
+    @GetMapping(Constants.calculateAverageSuccessPercentage)
+    @Operation(summary = Constants.calculateAvSccssPrcntgeSummary, description = Constants.calculateAvSccssPrcntgeDscr)
     public ResponseEntity<Double> calculateAverageSuccessPercentage() {
         double averageSuccessPercentage = playerService.calculateAverageSuccessPercentage();
         return ResponseEntity.ok(averageSuccessPercentage);
