@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/players")
+@RequestMapping(Constants.playerControllerRequestMapping)
 @Tag(name = Constants.swaggerTagName, description = Constants.swaggerTagDescription)
 public class PlayerController {
 
     @Autowired
     private PlayerService playerService;
 
-    @PostMapping("/create")
-    @Operation(summary = "Player creation", description = "This API allows you to create a new players.")
-    public ResponseEntity<Player> createPlayer(@Parameter(description = "Player object", required = true)@RequestBody Player player) {
+    @PostMapping(Constants.createPlayer)
+    @Operation(summary = Constants.createPlayerSummary, description = Constants.createPlayerDescription)
+    public ResponseEntity<Player> createPlayer(@Parameter(description = Constants.createPlayerParamDescr, required = true)@RequestBody Player player) {
         Player createdPlayer = playerService.createPlayer(player);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayer);
     }
 
-    @PutMapping("/update/{id}")
-    @Operation(summary = "Player update", description = "This API allows you to update existing players.")
-    public ResponseEntity<Player> updatePlayerName(@Parameter(description = "Player id and New Player name", required = true)@PathVariable int id, @RequestBody String name) {
+    @PutMapping(Constants.updatePlayerName)
+    @Operation(summary = Constants.updatePlayerSummary, description = Constants.updatePlayerDescr)
+    public ResponseEntity<Player> updatePlayerName(@Parameter(description = Constants.updatePlayerParamDescr, required = true)@PathVariable int id, @RequestBody String name) {
         Player updatedPlayer = playerService.updatePlayerName(id, name);
         return ResponseEntity.ok(updatedPlayer);
     }
