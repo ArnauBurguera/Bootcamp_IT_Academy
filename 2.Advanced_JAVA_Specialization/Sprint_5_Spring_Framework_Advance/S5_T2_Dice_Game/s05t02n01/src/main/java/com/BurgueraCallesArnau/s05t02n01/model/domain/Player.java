@@ -30,6 +30,8 @@ public class Player implements UserDetails {
 
     private String email;
     private String password;
+    
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public Player(String name){
