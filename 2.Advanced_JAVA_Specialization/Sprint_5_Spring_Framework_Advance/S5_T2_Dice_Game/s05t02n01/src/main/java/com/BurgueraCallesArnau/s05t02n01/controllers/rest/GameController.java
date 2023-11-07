@@ -2,6 +2,7 @@ package com.BurgueraCallesArnau.s05t02n01.controllers.rest;
 
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.service.GameService;
+import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,31 +14,31 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 
 @RestController
-@RequestMapping("/players/{playerId}/games")
+@RequestMapping(Constants.gameControllerRequestMapping)
 public class GameController {
 
     @Autowired
     private GameService gameService;
 
-    @PostMapping("/play")
-    @Operation(summary = "Play a game for a specific player", description = "This API allows you to create a new games.")
-    public ResponseEntity<Game> playGame(@Parameter(description = "The player id", required = true) @PathVariable int playerId) {
+    @PostMapping(Constants.playGame)
+    @Operation(summary = Constants.playGameSummary, description = Constants.playGameDsc)
+    public ResponseEntity<Game> playGame(@Parameter(description = Constants.playGameParam, required = true) @PathVariable int playerId) {
         Game game = gameService.playGame(playerId);
         return ResponseEntity.status(HttpStatus.CREATED).body(game);
     }
 
-    @DeleteMapping("/delete")
-    @Operation(summary = "Delete all game records for a specific player", description = "This API allows you to delete game record for a given player")
-    public ResponseEntity<String> deleteGamesForPlayer(@Parameter(description = "The player id", required = true)@PathVariable int playerId) {
+    @DeleteMapping(Constants.deleteGamesForPlayer)
+    @Operation(summary = Constants.deleteGamesForPlayerSummary, description = Constants.deleteGamesForPlayerDscr)
+    public ResponseEntity<String> deleteGamesForPlayer(@Parameter(description = Constants.deleteGamesForPlayerParam, required = true)@PathVariable int playerId) {
         gameService.deleteGamesForPlayer(playerId);
 
-        return ResponseEntity.ok("All games for the player have been deleted.");
+        return ResponseEntity.ok(Constants.deleteGamesForPlayerResponseBody);
     }
 
-    @GetMapping("/list")
+   /* @GetMapping("/list")
     @Operation(summary = "List game records for a specific player", description = "This API allows you to list game record for a given player")
     public ResponseEntity<List<Game>> getPlayerGames(@Parameter(description = "The player id", required = true)@PathVariable int playerId) {
         List<Game> games = gameService.getGamesForPlayer(playerId);
         return ResponseEntity.ok(games);
-    }
+    }*/
 }

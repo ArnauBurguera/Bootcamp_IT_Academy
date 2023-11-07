@@ -13,7 +13,9 @@ public class Constants {
     public static final String getRankingBasedOnSuccessPercentage = "/ranking";
     public static final String getLoser = "/ranking/loser";
     public static final String getWinner = "/ranking/winner";
-
+    public static final String gameControllerRequestMapping = "/players/{playerId}/games";
+    public static final String playGame = "/play";
+    public static final String deleteGamesForPlayer = "/delete";
 
     //SWAGGER
     public static final String swaggerTagName = "Dice Game";
@@ -43,9 +45,16 @@ public class Constants {
     public static final String getLoserDscr = "This API shows the Player with the lower Success Percentage";
     public static final String getWinnerSummary = "Winner";
     public static final String getWinnerDscr = "This API shows the Player with the higher Success Percentage";
+    public static final String playGameSummary = "Play a game for a specific player";
+    public static final String playGameDsc = "This API allows you to create a new games.";
+    public static final String playGameParam = "The player id";
+    public static final String deleteGamesForPlayerSummary = "Delete all game records for a specific player";
+    public static final String deleteGamesForPlayerDscr = "This API allows you to delete game record for a given player";
+    public static final String deleteGamesForPlayerParam = "The player id";
 
     //RESPONSE ENTITY BODY
     public static final String deletePlayerResponseBody = "Player has been deleted.";
+    public static final String deleteGamesForPlayerResponseBody = "All games for the player have been deleted.";
 
 
 
