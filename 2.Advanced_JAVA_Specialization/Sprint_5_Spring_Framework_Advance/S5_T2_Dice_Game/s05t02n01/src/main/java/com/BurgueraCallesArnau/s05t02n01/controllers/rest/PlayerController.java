@@ -71,15 +71,15 @@ public class PlayerController {
         return ResponseEntity.ok(averageSuccessPercentage);
     }
 
-    @GetMapping("/ranking")
-    @Operation(summary = "Player ranking", description = "This API shows a ranking of Players based on their success percentage")
+    @GetMapping(Constants.getRankingBasedOnSuccessPercentage)
+    @Operation(summary = Constants.getRankingSummary, description = Constants.getRankingDescr)
     public ResponseEntity<List<Player>> getRankingBasedOnSuccessPercentage() {
         List<Player> ranking = playerService.getPlayersRankedBySuccessPercentage();
         return ResponseEntity.ok(ranking);
     }
 
-    @GetMapping("/ranking/loser")
-    @Operation(summary = "Loser", description = "This API shows the Player with the lower Success Percentage")
+    @GetMapping(Constants.getLoser)
+    @Operation(summary = Constants.getLoserSummary, description = Constants.getLoserDscr)
     public ResponseEntity<Player> getLoser() {
         Player loser = playerService.getLoser();
         if (loser == null) {
@@ -88,8 +88,8 @@ public class PlayerController {
         return ResponseEntity.ok(loser);
     }
 
-    @GetMapping("/ranking/winner")
-    @Operation(summary = "Winner", description = "This API shows the Player with the higher Success Percentage")
+    @GetMapping(Constants.getWinner)
+    @Operation(summary = Constants.getWinnerSummary, description = Constants.getWinnerDscr)
     public ResponseEntity<Player> getWinner() {
         Player winner = playerService.getWinner();
         if (winner == null) {

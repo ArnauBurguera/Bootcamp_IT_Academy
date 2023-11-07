@@ -10,6 +10,9 @@ public class Constants {
     public static final String getPlayerGames = "/{id}/games";
     public static final String calculateSuccessPercentage = "/{id}/successPercentage";
     public static final String calculateAverageSuccessPercentage = "/averageSuccess";
+    public static final String getRankingBasedOnSuccessPercentage = "/ranking";
+    public static final String getLoser = "/ranking/loser";
+    public static final String getWinner = "/ranking/winner";
 
 
     //SWAGGER
@@ -34,13 +37,12 @@ public class Constants {
     public static final String calculateSuccessPercentageParam = "Player object";
     public static final String calculateAvSccssPrcntgeSummary = "Average Success Percentage";
     public static final String calculateAvSccssPrcntgeDscr = "This API shows the Average Success Percentage of all the game history";
-    public static final String getAllPlayersSummary = "Player List";
-    public static final String getAllPlayersSummary = "Player List";
-    public static final String getAllPlayersSummary = "Player List";
-
-
-
-
+    public static final String getRankingSummary = "Player ranking";
+    public static final String getRankingDescr = "This API shows a ranking of Players based on their success percentage";
+    public static final String getLoserSummary = "Loser";
+    public static final String getLoserDscr = "This API shows the Player with the lower Success Percentage";
+    public static final String getWinnerSummary = "Winner";
+    public static final String getWinnerDscr = "This API shows the Player with the higher Success Percentage";
 
     //RESPONSE ENTITY BODY
     public static final String deletePlayerResponseBody = "Player has been deleted.";
