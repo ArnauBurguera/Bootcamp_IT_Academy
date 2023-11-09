@@ -11,22 +11,27 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    /*private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authenticationProvider;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)//STATELESS for restful api only
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/auth/**", "/swagger-ui/index.html", "/v3/api-docs").permitAll()
+                                .antMatchers("/auth/**").permitAll()
+                                .antMatchers("/api/public/**").permitAll()
+                                .antMatchers("/api/private/**").hasAnyRole("USER", "ADMIN")
                                 .anyRequest().authenticated())
                 .sessionManagement(sessionManager ->
                         sessionManager
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling
+                                .authenticationEntryPoint(new JwtAuthenticationEntryPoint()))
+                .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(), jwtTokenUtil), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthorizationFilter(authenticationManager(), playerService), UsernamePasswordAuthenticationFilter.class)
                 .build();
-    }
+    }*/
 
 }
