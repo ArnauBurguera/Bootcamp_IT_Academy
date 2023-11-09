@@ -24,7 +24,8 @@ public class PlayerController {
 
     @PostMapping(Constants.createPlayer)
     @Operation(
-            summary = Constants.createPlayerSummary, description = Constants.createPlayerDescription
+            summary = Constants.createPlayerSummary,
+            description = Constants.createPlayerDescription
     )
     public ResponseEntity<Player> createPlayer(
             @Parameter(description = Constants.createPlayerParam, required = true)

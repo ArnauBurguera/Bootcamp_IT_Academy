@@ -10,5 +10,12 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody)
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
+
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest request){
+
+    }
 }
