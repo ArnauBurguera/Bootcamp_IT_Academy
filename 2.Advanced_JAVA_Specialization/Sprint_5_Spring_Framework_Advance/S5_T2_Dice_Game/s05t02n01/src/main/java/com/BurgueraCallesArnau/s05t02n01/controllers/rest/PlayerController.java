@@ -23,22 +23,33 @@ public class PlayerController {
     private PlayerService playerService;
 
     @PostMapping(Constants.createPlayer)
-    @Operation(summary = Constants.createPlayerSummary, description = Constants.createPlayerDescription)
-    public ResponseEntity<Player> createPlayer(@Parameter(description = Constants.createPlayerParam, required = true)@RequestBody Player player) {
+    @Operation(
+            summary = Constants.createPlayerSummary, description = Constants.createPlayerDescription
+    )
+    public ResponseEntity<Player> createPlayer(
+            @Parameter(description = Constants.createPlayerParam, required = true)
+            @RequestBody Player player
+    ) {
         Player createdPlayer = playerService.createPlayer(player);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayer);
     }
 
     @PutMapping(Constants.updatePlayerName)
     @Operation(summary = Constants.updatePlayerSummary, description = Constants.updatePlayerDescr)
-    public ResponseEntity<Player> updatePlayerName(@Parameter(description = Constants.updatePlayerParam, required = true)@PathVariable int id, @RequestBody String name) {
+    public ResponseEntity<Player> updatePlayerName(
+            @Parameter(description = Constants.updatePlayerParam, required = true)
+            @PathVariable int id, @RequestBody String name
+    ) {
         Player updatedPlayer = playerService.updatePlayerName(id, name);
         return ResponseEntity.ok(updatedPlayer);
     }
 
     @DeleteMapping(Constants.deletePlayer)
     @Operation(summary = Constants.deletePlayerSummary, description = Constants.deletePlayerDescr)
-    public ResponseEntity<String> deletePlayer(@Parameter(description = Constants.deletePlayerParam, required = true)@PathVariable int id) {
+    public ResponseEntity<String> deletePlayer(
+            @Parameter(description = Constants.deletePlayerParam, required = true)
+            @PathVariable int id
+    ) {
         playerService.deletePlayer(id);
         return ResponseEntity.ok(Constants.deletePlayerResponseBody);
     }
@@ -52,20 +63,32 @@ public class PlayerController {
 
     @GetMapping(Constants.getPlayerGames)
     @Operation(summary = Constants.getPlayerGamesSummary, description = Constants.getPlayerGamesDescr)
-    public ResponseEntity<List<Game>> getPlayerGames(@Parameter(description = Constants.getPlayerGamesParam, required = true)@PathVariable int id) {
+    public ResponseEntity<List<Game>> getPlayerGames(
+            @Parameter(description = Constants.getPlayerGamesParam, required = true)
+            @PathVariable int id
+    ) {
         List<Game> games = playerService.getPlayerGames(id);
         return ResponseEntity.ok(games);
     }
 
     @GetMapping(Constants.calculateSuccessPercentage)
-    @Operation(summary = Constants.calculateSuccessPercentageSummary, description = Constants.calculateSuccessPercentageDescr)
-    public ResponseEntity<Double> calculateSuccessPercentage(@Parameter(description = Constants.calculateSuccessPercentageParam, required = true)@PathVariable int id) {
+    @Operation(
+            summary = Constants.calculateSuccessPercentageSummary,
+            description = Constants.calculateSuccessPercentageDescr
+    )
+    public ResponseEntity<Double> calculateSuccessPercentage(
+            @Parameter(description = Constants.calculateSuccessPercentageParam, required = true)
+            @PathVariable int id
+    ) {
         double successPercentage = playerService.calculateSuccessPercentage(id);
         return ResponseEntity.ok(successPercentage);
     }
 
     @GetMapping(Constants.calculateAverageSuccessPercentage)
-    @Operation(summary = Constants.calculateAvSccssPrcntgeSummary, description = Constants.calculateAvSccssPrcntgeDscr)
+    @Operation(
+            summary = Constants.calculateAvSccssPrcntgeSummary,
+            description = Constants.calculateAvSccssPrcntgeDscr
+    )
     public ResponseEntity<Double> calculateAverageSuccessPercentage() {
         double averageSuccessPercentage = playerService.calculateAverageSuccessPercentage();
         return ResponseEntity.ok(averageSuccessPercentage);
