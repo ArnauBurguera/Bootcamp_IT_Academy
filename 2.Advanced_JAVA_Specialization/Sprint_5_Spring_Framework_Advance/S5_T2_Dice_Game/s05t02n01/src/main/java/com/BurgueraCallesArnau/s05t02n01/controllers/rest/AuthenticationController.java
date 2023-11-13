@@ -1,5 +1,7 @@
 package com.BurgueraCallesArnau.s05t02n01.controllers.rest;
 
+import com.BurgueraCallesArnau.s05t02n01.security.AuthenticationResponse;
+import com.BurgueraCallesArnau.s05t02n01.security.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
