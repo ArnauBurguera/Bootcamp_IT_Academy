@@ -5,8 +5,11 @@ import com.BurgueraCallesArnau.s05t02n01.model.domain.Role;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
 import com.BurgueraCallesArnau.s05t02n01.security.AuthenticationRequest;
 import com.BurgueraCallesArnau.s05t02n01.security.AuthenticationResponse;
+import com.BurgueraCallesArnau.s05t02n01.security.JwtService;
 import com.BurgueraCallesArnau.s05t02n01.security.RegisterRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,8 @@ public class AuthenticationService {
 
     private final PlayerRepository playerRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = Player.builder()
@@ -27,10 +32,23 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        return null;
+        playerRepository.save(user);
+        var jwtToken =jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        return null;
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                request.getEmail(), request.getPassword()
+                )
+        );
+        var user = playerRepository.findByEmail(request.getEmail()).orElseThrow();
+        var jwtToken =jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
     }
 }
