@@ -8,10 +8,8 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
-import org.springframework.lang.NonNull;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,7 +21,7 @@ public class JwtService {
     @Autowired
     private static Environment environment;
     @Value("${secret.key}")
-    private static String SECRET_KEY;
+    private static String SECRET_KEY;//todo THIS DOSN'T WORK
     public String extractUserName(String token) {
         return extractClaim(token,Claims::getSubject);
     }
@@ -74,7 +72,7 @@ public class JwtService {
     }
 
     private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode("81d64689eac8b9de0076fd026ad8e3653ed35b243d7d2edd5e6988b59d9de998");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
