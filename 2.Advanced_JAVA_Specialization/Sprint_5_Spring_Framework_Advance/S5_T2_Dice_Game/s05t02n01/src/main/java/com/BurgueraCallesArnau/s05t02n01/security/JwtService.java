@@ -18,10 +18,9 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    @Autowired
-    private static Environment environment;
+    
     @Value("${secret.key}")
-    private static String SECRET_KEY;//todo THIS DOSN'T WORK
+    private String secretKey;
     public String extractUserName(String token) {
         return extractClaim(token,Claims::getSubject);
     }
@@ -72,7 +71,7 @@ public class JwtService {
     }
 
     private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode("81d64689eac8b9de0076fd026ad8e3653ed35b243d7d2edd5e6988b59d9de998");
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
