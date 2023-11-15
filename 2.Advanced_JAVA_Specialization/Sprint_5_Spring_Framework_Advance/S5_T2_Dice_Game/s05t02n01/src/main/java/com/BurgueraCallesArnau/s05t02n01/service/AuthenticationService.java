@@ -13,11 +13,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
 
     private final PlayerRepository playerRepository;
+    private final PlayerService playerService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -26,10 +29,12 @@ public class AuthenticationService {
         var user = Player.builder()
                 .name(request.getName())
                 .email(request.getEmail())
+                .registrationDate(Calendar.getInstance().getTime())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        playerRepository.save(user);
+        playerService.createPlayer(user);
+        /*playerRepository.save(user);*/
         var jwtToken =jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
