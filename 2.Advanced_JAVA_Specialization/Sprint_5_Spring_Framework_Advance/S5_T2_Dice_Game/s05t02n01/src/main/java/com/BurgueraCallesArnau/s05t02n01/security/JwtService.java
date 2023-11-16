@@ -1,5 +1,6 @@
 package com.BurgueraCallesArnau.s05t02n01.security;
 
+import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,7 +18,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("${secret.key}")
+    @Value(Constants.secretKeyValue)
     private String secretKey;
     public String extractUserName(String token) {
         return extractClaim(token,Claims::getSubject);

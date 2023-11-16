@@ -1,5 +1,6 @@
 package com.BurgueraCallesArnau.s05t02n01.security;
 
+import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +26,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         (authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers("/auth/**")
+                        .requestMatchers(Constants.securityFilterChainRequestMatchers)
                         .permitAll()
                         .anyRequest()
                         .authenticated()

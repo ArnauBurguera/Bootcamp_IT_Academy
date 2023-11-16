@@ -1,6 +1,7 @@
 package com.BurgueraCallesArnau.s05t02n01.config;
 
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
+import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService(){
         return username -> playerRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException(Constants.UsernameNotFoundException));
     }
 
     @Bean

@@ -16,6 +16,9 @@ public class Constants {
     public static final String gameControllerRequestMapping = "/players/{playerId}/games";
     public static final String playGame = "/play";
     public static final String deleteGamesForPlayer = "/delete";
+    public static final String AuthenticationControllerRequestMapping = "/auth";
+    public static final String register = "/register";
+    public static final String authenticate = "/authenticate";
 
     //SWAGGER
     public static final String swaggerTagName = "Dice Game";
@@ -62,6 +65,21 @@ public class Constants {
     //PLAYER SERVICE
     public static final String playerDefaultName = "ANONYMOUS";
     public static final String PlayerNameAlreadyUsedExceptionMessage = "Player name already exists in database: ";
+
+    //APPLICATION CONFIG
+    public static final String UsernameNotFoundException = "User not found";
+
+    //JWT AUTHENTICATION FILTER
+    public static final String authHeader = "Authorization";
+    public static final String authHeaderStartsWith = "Bearer ";
+
+    //JWT SERVICE
+    public static final String secretKeyValue = "${secret.key}";
+
+    //SECURITY CONFIG
+    public static final String securityFilterChainRequestMatchers = "/auth/**";
+
+
 
 
 }
