@@ -29,7 +29,9 @@ public class GameController {
 
     @DeleteMapping(Constants.deleteGamesForPlayer)
     @Operation(summary = Constants.deleteGamesForPlayerSummary, description = Constants.deleteGamesForPlayerDscr)
-    public ResponseEntity<String> deleteGamesForPlayer(@Parameter(description = Constants.deleteGamesForPlayerParam, required = true) @PathVariable int playerId) {
+    public ResponseEntity<String> deleteGamesForPlayer(
+            @Parameter(description = Constants.deleteGamesForPlayerParam, required = true) @PathVariable int playerId
+    ) {
         gameService.deleteGamesForPlayer(playerId);
 
         return ResponseEntity.ok(Constants.deleteGamesForPlayerResponseBody);

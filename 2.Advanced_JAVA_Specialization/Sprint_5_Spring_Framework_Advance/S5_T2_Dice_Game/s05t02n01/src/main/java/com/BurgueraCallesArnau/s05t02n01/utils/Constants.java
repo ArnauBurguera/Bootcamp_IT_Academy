@@ -54,6 +54,12 @@ public class Constants {
     public static final String deleteGamesForPlayerSummary = "Delete all game records for a specific player";
     public static final String deleteGamesForPlayerDscr = "This API allows you to delete game record for a given player";
     public static final String deleteGamesForPlayerParam = "The player id";
+    public static final String registerSwaggerSummary = "Register a User with email and password";
+    public static final String registerSwaggerDscr = "This API allows you to register a User and recieve a JWT Token";
+    public static final String registerSwaggerParam = "Register Request";
+    public static final String authenticateSwaggerSummary = "Authenticate a User with email and password";
+    public static final String authenticateSwaggerDscr = "This API allows you to authenticate a User and recieve a JWT Token";
+    public static final String authenticateSwaggerParam = "Authentication Request";
 
     //RESPONSE ENTITY BODY
     public static final String deletePlayerResponseBody = "Player has been deleted.";
