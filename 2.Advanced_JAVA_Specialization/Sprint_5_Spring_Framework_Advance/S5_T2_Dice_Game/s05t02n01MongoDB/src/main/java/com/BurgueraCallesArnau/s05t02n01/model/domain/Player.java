@@ -1,6 +1,5 @@
 package com.BurgueraCallesArnau.s05t02n01.model.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
