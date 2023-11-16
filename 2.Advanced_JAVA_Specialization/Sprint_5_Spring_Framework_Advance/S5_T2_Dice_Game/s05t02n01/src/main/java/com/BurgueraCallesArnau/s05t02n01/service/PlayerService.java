@@ -22,7 +22,7 @@ public class PlayerService {
     private GameService gameService;
 
     public Player createPlayer(Player player) {
-        player.setRegistrationDate(Calendar.getInstance().getTime());
+        /*player.setRegistrationDate(Calendar.getInstance().getTime());*/
         checkPlayerName(player);
         return playerRepository.save(player);
     }

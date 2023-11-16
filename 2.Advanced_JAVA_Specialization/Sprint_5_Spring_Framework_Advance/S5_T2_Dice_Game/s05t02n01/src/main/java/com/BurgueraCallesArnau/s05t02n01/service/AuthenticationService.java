@@ -34,7 +34,6 @@ public class AuthenticationService {
                 .role(Role.USER)
                 .build();
         playerService.createPlayer(user);
-        /*playerRepository.save(user);*/
         var jwtToken =jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
