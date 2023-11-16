@@ -15,11 +15,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 public class Game {
     @Id
     private String id;
-    @Field("dice1")
     private int dice1;
-    @Field("v")
     private int dice2;
-    @Field("won")
     private boolean won;
 
     @DBRef
