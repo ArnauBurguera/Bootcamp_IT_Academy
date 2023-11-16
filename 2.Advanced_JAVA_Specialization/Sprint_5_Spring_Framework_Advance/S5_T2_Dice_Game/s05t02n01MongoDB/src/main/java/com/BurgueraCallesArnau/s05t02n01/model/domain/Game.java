@@ -3,23 +3,26 @@ package com.BurgueraCallesArnau.s05t02n01.model.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Entity
-@Getter
-@Setter
-@ToString
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection = "games")
 public class Game {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
+    @Field("dice1")
     private int dice1;
+    @Field("v")
     private int dice2;
+    @Field("won")
     private boolean won;
 
-    @ManyToOne
-    @JoinColumn(name = "player_Id")
+    @DBRef
     @JsonBackReference//If i don't do this Circular reference in JSON serialization
     private Player player;
 
