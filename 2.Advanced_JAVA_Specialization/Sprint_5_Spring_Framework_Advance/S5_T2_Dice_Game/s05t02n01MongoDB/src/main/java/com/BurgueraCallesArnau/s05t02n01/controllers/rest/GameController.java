@@ -5,6 +5,7 @@ import com.BurgueraCallesArnau.s05t02n01.service.GameService;
 import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class GameController {
 
     @PostMapping(Constants.playGame)
     @Operation(summary = Constants.playGameSummary, description = Constants.playGameDsc)
-    public ResponseEntity<Game> playGame(@Parameter(description = Constants.playGameParam, required = true) @PathVariable int playerId) {
+    public ResponseEntity<Game> playGame(@Parameter(description = Constants.playGameParam, required = true) @PathVariable ObjectId playerId) {
         Game game = gameService.playGame(playerId);
         return ResponseEntity.status(HttpStatus.CREATED).body(game);
     }
@@ -30,7 +31,7 @@ public class GameController {
     @DeleteMapping(Constants.deleteGamesForPlayer)
     @Operation(summary = Constants.deleteGamesForPlayerSummary, description = Constants.deleteGamesForPlayerDscr)
     public ResponseEntity<String> deleteGamesForPlayer(
-            @Parameter(description = Constants.deleteGamesForPlayerParam, required = true) @PathVariable int playerId
+            @Parameter(description = Constants.deleteGamesForPlayerParam, required = true) @PathVariable ObjectId playerId
     ) {
         gameService.deleteGamesForPlayer(playerId);
 

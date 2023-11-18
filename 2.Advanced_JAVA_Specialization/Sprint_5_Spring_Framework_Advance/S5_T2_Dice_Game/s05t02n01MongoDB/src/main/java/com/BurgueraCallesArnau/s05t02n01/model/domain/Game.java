@@ -3,8 +3,8 @@ package com.BurgueraCallesArnau.s05t02n01.model.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 
@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 @Document(collection = "games")
 public class Game {
     @Id
-    private String id;
+    private ObjectId id;
     private int dice1;
     private int dice2;
     private boolean won;

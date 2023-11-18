@@ -7,6 +7,7 @@ import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class PlayerController {
     @Operation(summary = Constants.updatePlayerSummary, description = Constants.updatePlayerDescr)
     public ResponseEntity<Player> updatePlayerName(
             @Parameter(description = Constants.updatePlayerParam, required = true)
-            @PathVariable int id, @RequestBody String name
+            @PathVariable ObjectId id, @RequestBody String name
     ) {
         Player updatedPlayer = playerService.updatePlayerName(id, name);
         return ResponseEntity.ok(updatedPlayer);
@@ -49,7 +50,7 @@ public class PlayerController {
     @Operation(summary = Constants.deletePlayerSummary, description = Constants.deletePlayerDescr)
     public ResponseEntity<String> deletePlayer(
             @Parameter(description = Constants.deletePlayerParam, required = true)
-            @PathVariable int id
+            @PathVariable ObjectId id
     ) {
         playerService.deletePlayer(id);
         return ResponseEntity.ok(Constants.deletePlayerResponseBody);
@@ -66,7 +67,7 @@ public class PlayerController {
     @Operation(summary = Constants.getPlayerGamesSummary, description = Constants.getPlayerGamesDescr)
     public ResponseEntity<List<Game>> getPlayerGames(
             @Parameter(description = Constants.getPlayerGamesParam, required = true)
-            @PathVariable int id
+            @PathVariable ObjectId id
     ) {
         List<Game> games = playerService.getPlayerGames(id);
         return ResponseEntity.ok(games);
@@ -79,7 +80,7 @@ public class PlayerController {
     )
     public ResponseEntity<Double> calculateSuccessPercentage(
             @Parameter(description = Constants.calculateSuccessPercentageParam, required = true)
-            @PathVariable int id
+            @PathVariable ObjectId id
     ) {
         double successPercentage = playerService.calculateSuccessPercentage(id);
         return ResponseEntity.ok(successPercentage);

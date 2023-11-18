@@ -6,7 +6,7 @@ import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.GameRepository;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
 import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
-import jakarta.persistence.EntityNotFoundException;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class GameService {
     @Autowired
     private PlayerRepository playerRepository;
 
-    public Game playGame(Integer playerId) {
+    public Game playGame(ObjectId playerId) {
         Game game = rollDice();
 
         Player player = findPlayer(playerId);
@@ -38,17 +38,17 @@ public class GameService {
         return new Game(dice1,dice2,won);
     }
 
-    public void deleteGamesForPlayer(Integer playerId) {
+    public void deleteGamesForPlayer(ObjectId playerId) {
         Player player = findPlayer(playerId);
         player.deleteAllGames();
         playerRepository.save(player);
     }
 
-    public List<Game> getGamesForPlayer(Integer playerId) {
+    public List<Game> getGamesForPlayer(ObjectId playerId) {
         return findPlayer(playerId).getGames();
     }
 
-    public Player findPlayer(Integer playerId){
+    public Player findPlayer(ObjectId playerId){
         return playerRepository.findById(playerId)
                 .orElseThrow(() -> new PlayerNotFoundException(Constants.PlayerNotFoundExceptionMessage + playerId));
     }

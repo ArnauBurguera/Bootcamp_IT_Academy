@@ -2,6 +2,7 @@ package com.BurgueraCallesArnau.s05t02n01.model.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +19,7 @@ import java.util.List;
 @Document(collection = "players")
 public class Player implements UserDetails {
     @Id
-    private String id;
+    private ObjectId id;
     private String name;
     private Date registrationDate;
     private List<Game> games;

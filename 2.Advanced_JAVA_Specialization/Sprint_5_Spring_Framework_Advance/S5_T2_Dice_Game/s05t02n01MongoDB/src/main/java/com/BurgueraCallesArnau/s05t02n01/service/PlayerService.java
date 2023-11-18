@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Comparator;
 
 import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class PlayerService {
         }
     }
 
-    public Player updatePlayerName(Integer id, String name) {
+    public Player updatePlayerName(ObjectId id, String name) {
         Player player = gameService.findPlayer(id);
         player.setName(name);
         return playerRepository.save(player);
@@ -45,11 +46,11 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
-    public List<Game> getPlayerGames(Integer playerId) {
+    public List<Game> getPlayerGames(ObjectId playerId) {
         return gameService.getGamesForPlayer(playerId);
     }
 
-    public double calculateSuccessPercentage(Integer playerId) {
+    public double calculateSuccessPercentage(ObjectId playerId) {
         List<Game> games = getPlayerGames(playerId);
         if (games.isEmpty()) {
             return 0.0;
@@ -103,7 +104,7 @@ public class PlayerService {
                 .orElse(null);
     }
 
-    public void deletePlayer(int playerId) {
+    public void deletePlayer(ObjectId playerId) {
         playerRepository.delete(gameService.findPlayer(playerId));
     }
 }
