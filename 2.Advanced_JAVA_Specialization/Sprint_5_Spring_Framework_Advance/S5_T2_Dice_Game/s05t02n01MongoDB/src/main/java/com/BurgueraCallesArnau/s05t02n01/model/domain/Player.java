@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -29,13 +28,13 @@ public class Player implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public Player(String name){
+   /* public Player(String name){
         this.name = name;
         this.games = new ArrayList<>();
-    }
+    }*/
     public void addGame(Game game) {
         games.add(game);
-        game.setPlayer(this);
+        //game.setPlayer(this);
     }
 
     public void deleteAllGames(){
