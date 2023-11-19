@@ -1,19 +1,25 @@
 package com.BurgueraCallesArnau.s05t02n01.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.bson.types.ObjectId;
 
-
-
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "games")
 public class Game {
-
-    //Doesn't need Id 'cause every Game is instantly associated to a player
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private ObjectId id;
     private int dice1;
     private int dice2;
     private boolean won;
+
+    @ManyToOne
+    @JoinColumn(name = "player_Id")
+    @JsonBackReference//If i don't do this Circular reference in JSON serialization
+    private Player player;
 
 }
