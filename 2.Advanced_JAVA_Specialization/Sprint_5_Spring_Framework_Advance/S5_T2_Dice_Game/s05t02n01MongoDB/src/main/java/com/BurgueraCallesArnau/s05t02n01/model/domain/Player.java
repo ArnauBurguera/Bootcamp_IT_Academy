@@ -28,10 +28,6 @@ public class Player implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-   /* public Player(String name){
-        this.name = name;
-        this.games = new ArrayList<>();
-    }*/
     public void addGame(Game game) {
         games.add(game);
         //game.setPlayer(this);
