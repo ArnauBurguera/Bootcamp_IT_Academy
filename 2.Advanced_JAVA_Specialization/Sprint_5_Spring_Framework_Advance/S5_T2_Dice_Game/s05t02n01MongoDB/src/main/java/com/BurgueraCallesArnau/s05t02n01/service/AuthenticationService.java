@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 @Service
@@ -31,6 +32,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .registrationDate(Calendar.getInstance().getTime())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .games(new ArrayList<>())
                 .role(Role.USER)
                 .build();
         playerService.createPlayer(user);

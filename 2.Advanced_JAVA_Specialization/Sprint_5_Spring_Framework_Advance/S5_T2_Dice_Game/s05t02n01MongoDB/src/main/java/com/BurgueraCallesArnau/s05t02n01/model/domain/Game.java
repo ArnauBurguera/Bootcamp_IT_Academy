@@ -19,9 +19,9 @@ public class Game {
     private int dice2;
     private boolean won;
 
-    @DBRef
+    /*@DBRef
     @JsonBackReference//If i don't do this Circular reference in JSON serialization
-    private Player player;
+    private Player player;*/
 
     public Game(int dice1, int dice2, Boolean won){
         this.dice1 = dice1;

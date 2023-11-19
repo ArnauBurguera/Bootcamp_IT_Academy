@@ -34,9 +34,6 @@ public class Player implements UserDetails {
         this.games = new ArrayList<>();
     }
     public void addGame(Game game) {
-        if (games == null) {
-            games = new ArrayList<>();
-        }
         games.add(game);
         game.setPlayer(this);
     }
