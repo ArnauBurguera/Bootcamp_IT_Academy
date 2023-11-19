@@ -30,7 +30,6 @@ public class Player implements UserDetails {
 
     public void addGame(Game game) {
         games.add(game);
-        //game.setPlayer(this);
     }
 
     public void deleteAllGames(){
