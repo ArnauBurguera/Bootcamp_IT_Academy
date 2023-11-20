@@ -21,16 +21,16 @@ public class GameService {
     private PlayerRepository playerRepository;
 
     public Game playGame(ObjectId playerId) {
-        Game game = rollDice();
-
         Player player = findPlayer(playerId);
+        Game game = rollDice(player.getId());
+
         player.addGame(game);
         playerRepository.save(player);
 
         return game;
     }
 
-    private Game rollDice(){
+    private Game rollDice(ObjectId playerId){
         int dice1 = (int) (Math.random() * 6) + 1;
         int dice2 = (int) (Math.random() * 6) + 1;
 
@@ -38,6 +38,7 @@ public class GameService {
                 .dice1(dice1)
                 .dice2(dice2)
                 .won(dice1 + dice2 == 7)
+                .playerId(playerId)
                 .build();
     }
 

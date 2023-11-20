@@ -18,11 +18,6 @@ public class Game {
     private int dice1;
     private int dice2;
     private boolean won;
-
-    /*@ManyToOne
-    @JoinColumn(name = "player_Id")
-    @JsonBackReference//If i don't do this Circular reference in JSON serialization*/
-    @DBRef
-    private Player player;
+    private ObjectId playerId;
 
 }
