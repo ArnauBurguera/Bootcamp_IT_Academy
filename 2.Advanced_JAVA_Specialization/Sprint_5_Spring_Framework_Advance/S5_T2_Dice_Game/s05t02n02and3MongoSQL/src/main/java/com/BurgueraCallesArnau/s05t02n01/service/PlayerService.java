@@ -21,9 +21,9 @@ public class PlayerService {
     @Autowired
     private GameService gameService;
 
-    public Player createPlayer(Player player) {
+    public void createPlayer(Player player) {
         checkPlayerName(player);
-        return playerRepository.save(player);
+        playerRepository.save(player);
     }
 
     private void checkPlayerName(Player player){
@@ -103,6 +103,7 @@ public class PlayerService {
     }
 
     public void deletePlayer(ObjectId playerId) {
+        gameService.deleteGamesFromRepo(playerId);
         playerRepository.delete(gameService.findPlayer(playerId));
     }
 }
