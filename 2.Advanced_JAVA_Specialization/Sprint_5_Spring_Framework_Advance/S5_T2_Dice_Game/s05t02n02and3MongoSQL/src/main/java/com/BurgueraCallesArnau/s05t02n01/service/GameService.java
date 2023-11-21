@@ -25,6 +25,7 @@ public class GameService {
         Game game = rollDice(player.getId());
 
         player.addGame(game);
+        gameRepository.save(game);
         playerRepository.save(player);
 
         return game;

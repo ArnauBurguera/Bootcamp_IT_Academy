@@ -10,11 +10,7 @@ import org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfigurati
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@SpringBootApplication/*(exclude = {DataSourceAutoConfiguration.class })*/
-/*@EnableAutoConfiguration(exclude = {MongoDataAutoConfiguration.class})*/
-/*@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
-@EnableJpaRepositories*/
-/*@EnableMongoRepositories*/
+@SpringBootApplication
 public class S05t02n01Application {
 
 	public static void main(String[] args) {

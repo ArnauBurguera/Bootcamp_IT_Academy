@@ -50,27 +50,4 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return  new BCryptPasswordEncoder();
     }
-
-   /* @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource);
-        em.setPackagesToScan("com.BurgueraCallesArnau.s05t02n01.model.domain");
-
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-
-        return em;
-    }
-
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.your.database.driver");
-        dataSource.setUrl("jdbc:your-database-url");
-        dataSource.setUsername("your-username");
-        dataSource.setPassword("your-password");
-
-        return dataSource;
-    }*/
 }
