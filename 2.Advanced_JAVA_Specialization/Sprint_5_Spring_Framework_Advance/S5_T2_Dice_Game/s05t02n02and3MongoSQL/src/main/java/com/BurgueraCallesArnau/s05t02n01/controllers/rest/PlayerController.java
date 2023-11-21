@@ -23,19 +23,6 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
-    @PostMapping(Constants.createPlayer)
-    @Operation(
-            summary = Constants.createPlayerSummary,
-            description = Constants.createPlayerDescription
-    )
-    public ResponseEntity<Player> createPlayer(
-            @Parameter(description = Constants.createPlayerParam, required = true)
-            @RequestBody Player player
-    ) {
-        Player createdPlayer = playerService.createPlayer(player);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayer);
-    }
-
     @PutMapping(Constants.updatePlayerName)
     @Operation(summary = Constants.updatePlayerSummary, description = Constants.updatePlayerDescr)
     public ResponseEntity<Player> updatePlayerName(
