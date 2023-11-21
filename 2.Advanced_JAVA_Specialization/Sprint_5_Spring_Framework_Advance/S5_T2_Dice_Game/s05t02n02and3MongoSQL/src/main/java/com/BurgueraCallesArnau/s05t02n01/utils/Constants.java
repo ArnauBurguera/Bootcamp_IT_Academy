@@ -83,7 +83,11 @@ public class Constants {
     public static final String secretKeyValue = "${secret.key}";
 
     //SECURITY CONFIG
-    public static final String securityFilterChainRequestMatchers = "/auth/**";
+    public static final String requestMatchersAuth = "/auth/**";
+    public static final String requestMatchersSwaggerUI = "/swagger-ui/**";
+    public static final String requestMatchersV3ApiDocs = "/v3/api-docs/**";
+    public static final String requestMatchersSwaggerResources = "/swagger-resources/**";
+    public static final String requestMatchersWebJars = "/webjars/**";
 
 
 

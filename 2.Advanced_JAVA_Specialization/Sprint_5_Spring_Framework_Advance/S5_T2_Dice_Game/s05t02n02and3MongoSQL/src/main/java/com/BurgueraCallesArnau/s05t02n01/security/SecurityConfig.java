@@ -26,7 +26,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         (authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers(Constants.securityFilterChainRequestMatchers)
+                        .requestMatchers(
+                                Constants.requestMatchersAuth,
+                                Constants.requestMatchersSwaggerUI,
+                                Constants.requestMatchersV3ApiDocs,
+                                Constants.requestMatchersSwaggerResources,
+                                Constants.requestMatchersWebJars
+                        )
                         .permitAll()
                         .anyRequest()
                         .authenticated()
