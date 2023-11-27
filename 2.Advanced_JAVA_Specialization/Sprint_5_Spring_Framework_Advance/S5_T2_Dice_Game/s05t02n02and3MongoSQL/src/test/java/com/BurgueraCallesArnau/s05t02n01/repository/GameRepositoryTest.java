@@ -27,6 +27,7 @@ public class GameRepositoryTest {
 
         Game savedGame = gameRepository.save(game);
         Assertions.assertNotNull(savedGame);
+        Assertions.assertTrue(savedGame.getId() > 0);
     }
 
 
