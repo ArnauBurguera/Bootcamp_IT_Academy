@@ -33,7 +33,7 @@ public class GameRepositoryTest {
     }
 
     @Test
-    public void gameRepository_FindAllTest_ShouldReturnMoreThanOneGame(){
+    public void gameRepository_DeleteAllTest_ShouldDeleteAllGamesInRepository(){
         Game game = Game.builder()
                 .dice1(3)
                 .dice2(4)
@@ -51,7 +51,8 @@ public class GameRepositoryTest {
         gameRepository.save(game2);
 
         List<Game> gameList = gameRepository.findAll();
-        Assertions.assertThat(gameList).isInstanceOf(List.class);
+        Assertions.assertThat(gameList).isNotNull();
+        Assertions.assertThat(gameList.size()).isEqualTo(2);
 
     }
 

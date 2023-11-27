@@ -9,6 +9,5 @@ import java.util.List;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, ObjectId> {
-
     List<Game> findByPlayerId(ObjectId playerId);
 }
