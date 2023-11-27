@@ -2,7 +2,6 @@ package com.BurgueraCallesArnau.s05t02n01.repository;
 
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import org.bson.types.ObjectId;
-/*import org.junit.jupiter.api.Assertions;*/
 import org.assertj.core.api.Assertions;
 
 import org.junit.jupiter.api.Test;
@@ -29,8 +28,8 @@ public class GameRepositoryTest {
                 .build();
 
         Game savedGame = gameRepository.save(game);
-        Assertions.assertNotNull(savedGame);
-        Assertions.assertTrue(savedGame.getId() > 0);
+        Assertions.assertThat(savedGame).isNotNull();
+        Assertions.assertThat(savedGame.getId()).isGreaterThan(0);
     }
 
     @Test
