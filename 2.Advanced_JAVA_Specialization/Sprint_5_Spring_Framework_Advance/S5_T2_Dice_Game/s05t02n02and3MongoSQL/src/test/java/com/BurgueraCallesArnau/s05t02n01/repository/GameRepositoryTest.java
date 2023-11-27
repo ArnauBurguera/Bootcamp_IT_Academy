@@ -3,10 +3,10 @@ package com.BurgueraCallesArnau.s05t02n01.repository;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import static org.junit.Assert.assertThat;
 
 @DataJpaTest
 public class GameRepositoryTest {
@@ -24,7 +24,7 @@ public class GameRepositoryTest {
                 .build();
 
         Game savedGame = gameRepository.save(game);
-        /*Assertions.assertThat(savedGame).is*/
+        Assertions.assertNotNull(savedGame);
     }
 
 
