@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -20,8 +19,6 @@ public class GameRepositoryTest {
 
     @Autowired
     private GameRepository gameRepository;
-    @Autowired
-    private PlayerRepository playerRepository;
 
     @Test
     public void saveTest_ShouldReturnSavedGame(){
@@ -61,31 +58,25 @@ public class GameRepositoryTest {
 
     @Test
     public void findByPlayerIdTest_ShouldReturnListOfGamesBasedOnPlayerId(){
+        ObjectId playerId = new ObjectId("655c7adf06e4ae59f47979ca");
+
         Game game1 = Game.builder()
+                .playerId(playerId)
                 .build();
         Game game2 = Game.builder()
+                .playerId(playerId)
                 .build();
         Game game3 = Game.builder()
+                .playerId(playerId)
                 .build();
 
         gameRepository.save(game1);
         gameRepository.save(game2);
         gameRepository.save(game3);
 
-        Player player = Player.builder()
-                .id(new ObjectId("655c7adf06e4ae59f47979ca"))
-                .build();
-
-        player.addGame(game1);
-        player.addGame(game2);
-        player.addGame(game3);
-        playerRepository.save(player);
-
-        gameRepository.findByPlayerId(new ObjectId("655c7adf06e4ae59f47979ca"));
-
-
-
-
+        List<Game> gameList = gameRepository.findByPlayerId(playerId);
+        Assertions.assertThat(gameList).isNotNull();
+        Assertions.assertThat(gameList).containsExactly(game1,game2,game3);
     }
 
 
