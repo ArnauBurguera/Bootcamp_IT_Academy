@@ -6,6 +6,7 @@ import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.GameRepository;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
 import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
+import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class GameService {
 
-    @Autowired
-    private GameRepository gameRepository;
-    @Autowired
-    private PlayerRepository playerRepository;
+    private final GameRepository gameRepository;
+    private final PlayerRepository playerRepository;
 
     public Game playGame(ObjectId playerId) {
         Player player = findPlayer(playerId);

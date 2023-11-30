@@ -8,6 +8,7 @@ import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
 import java.util.Comparator;
 
 import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
+import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PlayerService {
-    @Autowired
-    private PlayerRepository playerRepository;
-    @Autowired
-    private GameService gameService;
+
+    private final PlayerRepository playerRepository;
+    private final GameService gameService;
 
     public void createPlayer(Player player) {
         checkPlayerName(player);

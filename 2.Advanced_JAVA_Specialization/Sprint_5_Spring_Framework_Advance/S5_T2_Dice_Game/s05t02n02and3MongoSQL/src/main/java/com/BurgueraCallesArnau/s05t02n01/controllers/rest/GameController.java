@@ -5,6 +5,7 @@ import com.BurgueraCallesArnau.s05t02n01.service.GameService;
 import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(Constants.gameControllerRequestMapping)
+@RequiredArgsConstructor
 public class GameController {
 
-    @Autowired
-    private GameService gameService;
+    private final GameService gameService;
 
     @PostMapping(Constants.playGame)
     @Operation(summary = Constants.playGameSummary, description = Constants.playGameDsc)

@@ -7,6 +7,7 @@ import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,11 +18,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(Constants.playerControllerRequestMapping)
+@RequiredArgsConstructor
 @Tag(name = Constants.swaggerTagName, description = Constants.swaggerTagDescription)
 public class PlayerController {
 
-    @Autowired
-    private PlayerService playerService;
+    private final PlayerService playerService;
 
     @PutMapping(Constants.updatePlayerName)
     @Operation(summary = Constants.updatePlayerSummary, description = Constants.updatePlayerDescr)

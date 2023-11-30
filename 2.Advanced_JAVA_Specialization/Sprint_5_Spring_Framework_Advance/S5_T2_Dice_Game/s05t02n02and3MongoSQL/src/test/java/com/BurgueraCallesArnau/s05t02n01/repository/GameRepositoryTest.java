@@ -1,9 +1,9 @@
 package com.BurgueraCallesArnau.s05t02n01.repository;
 
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
-import org.bson.types.ObjectId;
+import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
-
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +17,13 @@ import java.util.List;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class GameRepositoryTest {
 
+    private final GameRepository gameRepository;//Field injection is not best practice
+
     @Autowired
-    private GameRepository gameRepository;
-
-    /*private final GameRepository gameRepository;//Field injection Autowired is not best practice
-
     public GameRepositoryTest(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
     }
-*/
+
     @DisplayName("Game Repository Save - Should return a Saved Game")
     @Test
     public void saveTest_ShouldReturnSavedGame(){
@@ -87,8 +85,4 @@ public class GameRepositoryTest {
         Assertions.assertThat(gameList).isNotNull();
         Assertions.assertThat(gameList).containsExactly(game1,game2,game3);
     }
-
-
-
-
 }
