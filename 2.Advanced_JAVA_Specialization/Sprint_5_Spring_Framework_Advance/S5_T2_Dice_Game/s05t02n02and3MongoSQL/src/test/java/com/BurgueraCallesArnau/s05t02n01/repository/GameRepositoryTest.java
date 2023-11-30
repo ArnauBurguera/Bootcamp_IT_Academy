@@ -15,7 +15,7 @@ import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class GameRepositoryTest {
+public class GameRepositoryTest {//TODO: findPlayer(id);
 
     private final GameRepository gameRepository;//Field injection is not best practice
 
@@ -62,9 +62,9 @@ public class GameRepositoryTest {
         Assertions.assertThat(gameRepository.findAll()).isEmpty();
     }
 
-    @DisplayName("Game Repository Find By Player Id - Should return a List of games based on PlayerId")
+    @DisplayName("Game Repository Find Game By Player Id - Should return a List of games based on PlayerId")
     @Test
-    public void findByPlayerIdTest_ShouldReturnListOfGamesBasedOnPlayerId(){
+    public void findGamesByPlayerIdTest_ShouldReturnListOfGamesBasedOnPlayerId(){
         ObjectId playerId = new ObjectId("655c7adf06e4ae59f47979ca");
 
         Game game1 = Game.builder()
@@ -81,7 +81,7 @@ public class GameRepositoryTest {
         gameRepository.save(game2);
         gameRepository.save(game3);
 
-        List<Game> gameList = gameRepository.findByPlayerId(playerId);
+        List<Game> gameList = gameRepository.findGamesByPlayerId(playerId);
         Assertions.assertThat(gameList).isNotNull();
         Assertions.assertThat(gameList).containsExactly(game1,game2,game3);
     }

@@ -51,7 +51,7 @@ public class GameService {
     }
 
     public void deleteGamesFromRepo(ObjectId playerId){
-        List<Game> gamesToDelete = gameRepository.findByPlayerId(playerId);
+        List<Game> gamesToDelete = gameRepository.findGamesByPlayerId(playerId);
         gameRepository.deleteAll(gamesToDelete);
     }
 
