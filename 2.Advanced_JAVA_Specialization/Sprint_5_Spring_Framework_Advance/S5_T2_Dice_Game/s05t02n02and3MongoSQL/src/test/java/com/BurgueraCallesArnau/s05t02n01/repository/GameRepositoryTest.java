@@ -15,7 +15,7 @@ import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class GameRepositoryTest {//TODO: findPlayer(id);
+public class GameRepositoryTest {
 
     private final GameRepository gameRepository;//Field injection is not best practice
 
