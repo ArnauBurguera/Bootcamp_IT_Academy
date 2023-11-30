@@ -1,7 +1,6 @@
 package com.BurgueraCallesArnau.s05t02n01.repository;
 
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
-import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.DisplayName;

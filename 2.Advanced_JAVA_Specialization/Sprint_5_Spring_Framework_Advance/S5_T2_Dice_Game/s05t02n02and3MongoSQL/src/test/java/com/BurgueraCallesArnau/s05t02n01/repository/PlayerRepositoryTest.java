@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 
+import java.util.List;
+
 @DataMongoTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class PlayerRepositoryTest {
-    //TODO: save, findAll, delete, findByEmail(String email), findById(playerId)
+    //TODO: findAll, delete, findByEmail(String email), findById(playerId)
 
     private final PlayerRepository playerRepository;//Field injection is not best practice
 
@@ -28,5 +30,20 @@ public class PlayerRepositoryTest {
 
         Player savedPlayer = playerRepository.save(player);
         Assertions.assertThat(player).isNotNull();
+    }
+
+    @DisplayName("Player Repository FindAll - Should return a list of players")
+    @Test
+    public void findAllTest_ShouldReturnListOfPlayers() {
+        Player player1 = Player.builder().build();
+        Player player2 = Player.builder().build();
+
+        playerRepository.save(player1);
+        playerRepository.save(player2);
+
+        List<Player> players = playerRepository.findAll();
+
+        Assertions.assertThat(players).isNotNull();
+        Assertions.assertThat(players).hasSize(2);
     }
 }
