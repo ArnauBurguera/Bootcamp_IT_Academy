@@ -8,12 +8,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.TestPropertySource;
+import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@TestPropertySource(properties = {
+        "spring.test.database.replace=none",
+        "spring.datasource.url=jdbc:tc:mysql:8.0.33://localhost/testdb?TC_REUSABLE=true",
+        "spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver"
+})
 public class GameRepositoryTest {
 
     private final GameRepository gameRepository;//Field injection is not best practice
