@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @DataJpaTest
-@TestPropertySource(properties = {
+@TestPropertySource(properties = {//Testcontainer run with Docker image mysql 8.0.33 
         "spring.test.database.replace=none",
         "spring.datasource.url=jdbc:tc:mysql:8.0.33://localhost/testdb?TC_REUSABLE=true",
         "spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver"
