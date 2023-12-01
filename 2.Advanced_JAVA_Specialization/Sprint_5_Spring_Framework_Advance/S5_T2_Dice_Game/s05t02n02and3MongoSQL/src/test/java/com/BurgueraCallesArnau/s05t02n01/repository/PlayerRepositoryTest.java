@@ -65,4 +65,16 @@ public class PlayerRepositoryTest {
         Assertions.assertThat(players).isNotNull();
         Assertions.assertThat(players).hasSize(2);
     }
+
+    @DisplayName("Player Repository Delete - Should delete a player")
+    @Test
+    public void deleteTest_ShouldDeletePlayer() {
+        Player player = Player.builder().build();
+        playerRepository.save(player);
+
+        playerRepository.delete(player);
+
+        Assertions.assertThat(playerRepository.findById(player.getId())).isEmpty();
+        Assertions.assertThat(playerRepository.findAll().isEmpty());
+    }
 }
