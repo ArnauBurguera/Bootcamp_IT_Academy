@@ -6,18 +6,15 @@ import org.bson.types.ObjectId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
-import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 @DataJpaTest
-@TestPropertySource(properties = {//Testcontainer run with Docker image mysql 8.0.33 
+@TestPropertySource(properties = {//Testcontainer run with Docker image mysql 8.0.33
         "spring.test.database.replace=none",
         "spring.datasource.url=jdbc:tc:mysql:8.0.33://localhost/testdb?TC_REUSABLE=true",
         "spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver"
