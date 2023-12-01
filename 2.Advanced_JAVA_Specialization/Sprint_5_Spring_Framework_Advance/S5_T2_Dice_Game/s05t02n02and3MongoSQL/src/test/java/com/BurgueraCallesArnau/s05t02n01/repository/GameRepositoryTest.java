@@ -3,6 +3,7 @@ package com.BurgueraCallesArnau.s05t02n01.repository;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import org.assertj.core.api.Assertions;
 import org.bson.types.ObjectId;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @DataJpaTest
-@TestPropertySource(properties = {//Testcontainer run with Docker image mysql 8.0.33
+@TestPropertySource(properties = {//Testcontainer run with Docker image mysql 8.0.33 (in-memory repo tests are bad practice)
         "spring.test.database.replace=none",
         "spring.datasource.url=jdbc:tc:mysql:8.0.33://localhost/testdb?TC_REUSABLE=true",
         "spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver"
@@ -26,6 +27,11 @@ public class GameRepositoryTest {
     @Autowired
     public GameRepositoryTest(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
+    }
+
+    @BeforeEach
+    void setUp(){
+        gameRepository.deleteAll();
     }
 
     @DisplayName("Game Repository Save - Should return a Saved Game")
