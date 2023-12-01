@@ -48,7 +48,7 @@ public class PlayerRepositoryTest {
         Player player = Player.builder().build();
 
         Player savedPlayer = playerRepository.save(player);
-        Assertions.assertThat(player).isNotNull();
+        Assertions.assertThat(savedPlayer).isNotNull();
     }
 
     @DisplayName("Player Repository FindAll - Should return a list of players")
