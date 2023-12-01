@@ -12,6 +12,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.containers.MongoDBContainer;
 
 import java.util.List;
+import java.util.Optional;
 
 @DataMongoTest
 @TestPropertySource(properties = {
@@ -19,10 +20,9 @@ import java.util.List;
         "spring.data.mongodb.uri=mongodb://${mongodb.host}:${mongodb.port}/testdb"
 })
 public class PlayerRepositoryTest {
-    //TODO: findByEmail(String email), findById(playerId)
+
     //"mongo:latest" in next line downloads latest Docker image for Mongo
     private static final MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:latest");
-
     private final PlayerRepository playerRepository;//Field injection is not best practice
 
     @Autowired
@@ -89,5 +89,17 @@ public class PlayerRepositoryTest {
 
         Assertions.assertThat(foundPlayer).isNotNull();
         Assertions.assertThat(foundPlayer.getEmail()).isEqualTo(email);
+    }
+
+    @DisplayName("Player Repository FindById - Should return a player with the given ID")
+    @Test
+    public void findByIdTest_ShouldReturnPlayer() {
+        Player player = Player.builder().build();
+        playerRepository.save(player);
+
+        Optional<Player> foundPlayerOptional = playerRepository.findById(player.getId());
+
+        Assertions.assertThat(foundPlayerOptional).isPresent();
+        Assertions.assertThat(foundPlayerOptional.get()).isEqualTo(player);
     }
 }
