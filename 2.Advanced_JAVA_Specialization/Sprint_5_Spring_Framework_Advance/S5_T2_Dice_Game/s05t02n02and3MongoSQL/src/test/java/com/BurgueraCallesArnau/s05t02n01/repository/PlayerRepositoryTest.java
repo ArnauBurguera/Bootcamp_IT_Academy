@@ -19,7 +19,7 @@ import java.util.List;
         "spring.data.mongodb.uri=mongodb://${mongodb.host}:${mongodb.port}/testdb"
 })
 public class PlayerRepositoryTest {
-    //TODO: delete, findByEmail(String email), findById(playerId)
+    //TODO: findByEmail(String email), findById(playerId)
     //"mongo:latest" in next line downloads latest Docker image for Mongo
     private static final MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:latest");
 
@@ -76,5 +76,18 @@ public class PlayerRepositoryTest {
 
         Assertions.assertThat(playerRepository.findById(player.getId())).isEmpty();
         Assertions.assertThat(playerRepository.findAll().isEmpty());
+    }
+
+    @DisplayName("Player Repository FindByEmail - Should return a player with the given email")
+    @Test
+    public void findByEmailTest_ShouldReturnPlayer() {
+        String email = "test@example.com";
+        Player player = Player.builder().email(email).build();
+        playerRepository.save(player);
+
+        Player foundPlayer = playerRepository.findByEmail(email).get();
+
+        Assertions.assertThat(foundPlayer).isNotNull();
+        Assertions.assertThat(foundPlayer.getEmail()).isEqualTo(email);
     }
 }
