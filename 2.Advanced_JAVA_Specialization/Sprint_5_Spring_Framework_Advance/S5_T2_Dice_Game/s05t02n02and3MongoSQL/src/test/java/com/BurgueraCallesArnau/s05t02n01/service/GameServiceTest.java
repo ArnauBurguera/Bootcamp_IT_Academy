@@ -4,6 +4,8 @@ import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.GameRepository;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
+import org.bson.types.ObjectId;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,13 +15,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.assertj.core.api.Assertions;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class GameServiceTest {
     //TODO findPlayer(id), getGamesForPlayer(playerId)
-    //TODO rollDice(ObjectId playerId), deleteGamesForPlayer(ObjectId playerId), deleteGamesFromRepo(ObjectId playerId)
+    //TODO deleteGamesForPlayer(ObjectId playerId), deleteGamesFromRepo(ObjectId playerId)
 
     @Mock
     private GameRepository gameRepository;
@@ -28,6 +31,12 @@ public class GameServiceTest {
 
     @InjectMocks
     private GameService gameService;
+
+    @BeforeEach
+    void setUp(){
+        gameRepository.deleteAll();
+        playerRepository.deleteAll();
+    }
 
     @DisplayName("Game Service Play Game - Should return a Game Object")
     @Test
@@ -43,16 +52,20 @@ public class GameServiceTest {
         Assertions.assertThat(player.getGames().size()).isEqualTo(1);
     }
 
-    @DisplayName("Game Service Roll Dice - Should return a Game Object")
+    @DisplayName("Game Service Delete Games For Player - Should delete games and update player")
     @Test
-    public void rollDiceTest_ShouldReturnGameObject() {
-        ObjectId playerId = new ObjectId();
-        GameService spyGameService = spy(gameService);
-        doReturn(new Player(playerId, "Player1")).when(spyGameService).findPlayer(playerId);
+    public void deleteGamesForPlayerTest_ShouldDeleteGamesAndUpdatePlayer() {
+        Player player = Player.builder().games(new ArrayList<>()).build();
+        Game game1 = Game.builder().build();
+        Game game2 = Game.builder().build();
+        player.addGame(game1);
+        player.addGame(game2);
+        when(playerRepository.findById(player.getId())).thenReturn(Optional.of(player));
 
-        Game result = spyGameService.rollDice(playerId);
+        gameService.deleteGamesForPlayer(player.getId());
 
-        assertNotNull(result);
-        verify(gameRepository, times(1)).save(any(Game.class));
+        verify(gameRepository, times(1)).deleteAll(anyList());
+        verify(playerRepository, times(1)).save(any(Player.class));
+        Assertions.assertThat(player.getGames().isEmpty()).isTrue();
     }
 }
