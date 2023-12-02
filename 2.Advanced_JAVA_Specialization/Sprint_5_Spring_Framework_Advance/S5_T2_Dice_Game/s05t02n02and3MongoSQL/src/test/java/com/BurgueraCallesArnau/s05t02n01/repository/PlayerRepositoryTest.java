@@ -75,7 +75,7 @@ public class PlayerRepositoryTest {
         playerRepository.delete(player);
 
         Assertions.assertThat(playerRepository.findById(player.getId())).isEmpty();
-        Assertions.assertThat(playerRepository.findAll().isEmpty());
+        Assertions.assertThat(playerRepository.findAll().isEmpty()).isTrue();
     }
 
     @DisplayName("Player Repository FindByEmail - Should return a player with the given email")
