@@ -4,6 +4,7 @@ import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.GameRepository;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,8 +29,9 @@ public class GameServiceTest {
     @InjectMocks
     private GameService gameService;
 
+    @DisplayName("Game Service Play Game - Should return a Game Object")
     @Test
-    public void testPlayGame() {
+    public void PlayGameTest_ShouldReturnGameObject() {
         Player player = Player.builder().games(new ArrayList<>()).build();
         when(playerRepository.findById(player.getId())).thenReturn(java.util.Optional.of(player));
 
@@ -39,5 +41,18 @@ public class GameServiceTest {
         verify(playerRepository, times(1)).save(any(Player.class));
         Assertions.assertThat(player.getGames().contains(game)).isTrue();
         Assertions.assertThat(player.getGames().size()).isEqualTo(1);
+    }
+
+    @DisplayName("Game Service Roll Dice - Should return a Game Object")
+    @Test
+    public void rollDiceTest_ShouldReturnGameObject() {
+        ObjectId playerId = new ObjectId();
+        GameService spyGameService = spy(gameService);
+        doReturn(new Player(playerId, "Player1")).when(spyGameService).findPlayer(playerId);
+
+        Game result = spyGameService.rollDice(playerId);
+
+        assertNotNull(result);
+        verify(gameRepository, times(1)).save(any(Game.class));
     }
 }
