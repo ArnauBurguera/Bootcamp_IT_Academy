@@ -15,6 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.assertj.core.api.Assertions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -22,7 +24,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class GameServiceTest {
     //TODO findPlayer(id), getGamesForPlayer(playerId)
-    //TODO deleteGamesForPlayer(ObjectId playerId), deleteGamesFromRepo(ObjectId playerId)
+    //TODO  deleteGamesFromRepo(ObjectId playerId)
 
     @Mock
     private GameRepository gameRepository;
@@ -67,5 +69,21 @@ public class GameServiceTest {
         verify(gameRepository, times(1)).deleteAll(anyList());
         verify(playerRepository, times(1)).save(any(Player.class));
         Assertions.assertThat(player.getGames().isEmpty()).isTrue();
+    }
+
+    @DisplayName("Game Service Delete Games From Repo - Should delete games from Game repository")
+    @Test
+    public void deleteGamesFromRepoTest_ShouldDeleteGamesFromGameRepository() {
+        Player player = Player.builder().games(new ArrayList<>()).build();
+        Game game1 = Game.builder().build();
+        Game game2 = Game.builder().build();
+        player.addGame(game1);
+        player.addGame(game2);
+        when(gameRepository.findGamesByPlayerId(player.getId())).thenReturn(player.getGames());
+
+        gameService.deleteGamesFromRepo(player.getId());
+
+        verify(gameRepository, times(1)).deleteAll(player.getGames());
+        Assertions.assertThat(gameRepository.findAll().isEmpty()).isTrue();
     }
 }
