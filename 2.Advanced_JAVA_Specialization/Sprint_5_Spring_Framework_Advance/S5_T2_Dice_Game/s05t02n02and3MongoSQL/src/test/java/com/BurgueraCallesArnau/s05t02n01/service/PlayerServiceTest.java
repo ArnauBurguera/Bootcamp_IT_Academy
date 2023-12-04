@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class PlayerServiceTest {
-    /*TODO createPlayer(Player player),checkPlayerName(Player player),updatePlayerName(ObjectId id, String name)
+    /*TODO checkPlayerName(Player player),updatePlayerName(ObjectId id, String name)
     TODO getAllPlayers(), getPlayerGames(ObjectId playerId), calculateSuccessPercentage(ObjectId playerId)
     TODO calculateAverageSuccessPercentage(), getPlayersRankedBySuccessPercentage(), getLoser(), getWinner()
     TODO deletePlayer(ObjectId playerId)
@@ -47,5 +47,20 @@ public class PlayerServiceTest {
         playerService.createPlayer(player);
 
         verify(playerRepository, times(1)).save(player);
+    }
+
+    @DisplayName("Player Service Update Player Name - Should update player name")
+    @Test
+    public void updatePlayerNameTest_ShouldUpdatePlayerName() {
+        String newName = "NewName";
+        Player player = Player.builder().games(new ArrayList<>()).build();
+
+        when(gameService.findPlayer(player.getId())).thenReturn(player);
+        when(playerRepository.save(player)).thenReturn(player);
+
+        Player updatedPlayer = playerService.updatePlayerName(player.getId(), newName);
+
+        verify(playerRepository, times(1)).save(player);
+        Assertions.assertThat(gameService.findPlayer(player.getId()).getName()).isEqualTo(newName);
     }
 }
