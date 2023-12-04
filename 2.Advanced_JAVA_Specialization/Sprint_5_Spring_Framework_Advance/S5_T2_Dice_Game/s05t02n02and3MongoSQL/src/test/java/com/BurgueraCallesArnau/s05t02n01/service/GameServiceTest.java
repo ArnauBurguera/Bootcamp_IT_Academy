@@ -102,4 +102,16 @@ public class GameServiceTest {
         Assertions.assertThat(result).isNotNull();
         Assertions.assertThat(result).containsExactly(game1,game2);
     }
+
+    @DisplayName("Game Service Find Player - Should return a player object")
+    @Test
+    public void findPlayerTest_ShouldReturnPlayerObject() {
+        Player player = Player.builder().games(new ArrayList<>()).build();
+        when(playerRepository.findById(player.getId())).thenReturn(Optional.of(player));
+
+        Player result = gameService.findPlayer(player.getId());
+
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result).isSameAs(player);
+    }
 }
