@@ -1,5 +1,6 @@
 package com.BurgueraCallesArnau.s05t02n01.service;
 
+import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import org.junit.jupiter.api.Test;
 import org.assertj.core.api.Assertions;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @ExtendWith(MockitoExtension.class)
 public class PlayerServiceTest {
     /*TODO checkPlayerName(Player player)
-    TODO getAllPlayers(), getPlayerGames(ObjectId playerId), calculateSuccessPercentage(ObjectId playerId)
+    TODO getPlayerGames(ObjectId playerId), calculateSuccessPercentage(ObjectId playerId)
     TODO calculateAverageSuccessPercentage(), getPlayersRankedBySuccessPercentage(), getLoser(), getWinner()
     TODO deletePlayer(ObjectId playerId)
      */
@@ -79,5 +80,22 @@ public class PlayerServiceTest {
 
         verify(playerRepository, times(1)).findAll();
         Assertions.assertThat((players)).isEqualTo(result);
+    }
+
+    @DisplayName("Player Service Get Player Games - Should return the list of player's games")
+    @Test
+    public void getPlayerGamesTest_ShouldReturnListOfPlayerGames() {
+        Player player = Player.builder().build();
+        Game game1 = Game.builder().build();
+        Game game2 = Game.builder().build();
+        List<Game> games = new ArrayList<>();
+        games.add(game1);
+        games.add(game2);
+        when(gameService.getGamesForPlayer(player.getId())).thenReturn(games);
+
+        List<Game> result = playerService.getPlayerGames(player.getId());
+
+        verify(gameService, times(1)).getGamesForPlayer(player.getId());
+        Assertions.assertThat(games).isEqualTo(result);
     }
 }
