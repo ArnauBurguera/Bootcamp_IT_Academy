@@ -86,4 +86,20 @@ public class GameServiceTest {
         verify(gameRepository, times(1)).deleteAll(player.getGames());
         Assertions.assertThat(gameRepository.findAll().isEmpty()).isTrue();
     }
+
+    @DisplayName("Game Service Get Games For Player - Should return a list of games for a player")
+    @Test
+    public void getGamesForPlayerTest_ShouldReturnListOfGamesForPlayer() {
+        Player player = Player.builder().games(new ArrayList<>()).build();
+        Game game1 = Game.builder().build();
+        Game game2 = Game.builder().build();
+        player.addGame(game1);
+        player.addGame(game2);
+        when(playerRepository.findById(player.getId())).thenReturn(Optional.of(player));
+
+        List<Game> result = gameService.getGamesForPlayer(player.getId());
+
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result).containsExactly(game1,game2);
+    }
 }
