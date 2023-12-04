@@ -20,7 +20,7 @@ import java.util.Optional;
 @ExtendWith(MockitoExtension.class)
 public class PlayerServiceTest {
     /*TODO checkPlayerName(Player player)
-    TODO getPlayerGames(ObjectId playerId), calculateSuccessPercentage(ObjectId playerId)
+    TODO calculateSuccessPercentage(ObjectId playerId)
     TODO calculateAverageSuccessPercentage(), getPlayersRankedBySuccessPercentage(), getLoser(), getWinner()
     TODO deletePlayer(ObjectId playerId)
      */
@@ -97,5 +97,23 @@ public class PlayerServiceTest {
 
         verify(gameService, times(1)).getGamesForPlayer(player.getId());
         Assertions.assertThat(games).isEqualTo(result);
+    }
+
+    @DisplayName("Player Service Calculate Success Percentage - Should calculate success percentage")
+    @Test
+    public void calculateSuccessPercentageTest_ShouldCalculateSuccessPercentage() {
+        Player player = Player.builder().build();
+        List<Game> games = new ArrayList<>();
+        Game game1 = Game.builder().won(true).build();
+        Game game2 = Game.builder().won(false).build();
+        games.add(game1);
+        games.add(game2);
+        final double  PERCENTAGE = 50.0d;
+        when(gameService.getGamesForPlayer(player.getId())).thenReturn(games);
+
+        double result = playerService.calculateSuccessPercentage(player.getId());
+
+        verify(gameService, times(1)).getGamesForPlayer(player.getId());
+        Assertions.assertThat(PERCENTAGE).isEqualTo(result);
     }
 }
