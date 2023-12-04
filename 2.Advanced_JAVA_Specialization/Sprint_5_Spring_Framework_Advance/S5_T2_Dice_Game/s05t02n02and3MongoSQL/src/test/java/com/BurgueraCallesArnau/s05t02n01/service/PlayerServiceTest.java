@@ -13,11 +13,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class PlayerServiceTest {
-    /*TODO checkPlayerName(Player player),updatePlayerName(ObjectId id, String name)
+    /*TODO checkPlayerName(Player player)
     TODO getAllPlayers(), getPlayerGames(ObjectId playerId), calculateSuccessPercentage(ObjectId playerId)
     TODO calculateAverageSuccessPercentage(), getPlayersRankedBySuccessPercentage(), getLoser(), getWinner()
     TODO deletePlayer(ObjectId playerId)
@@ -62,5 +63,21 @@ public class PlayerServiceTest {
 
         verify(playerRepository, times(1)).save(player);
         Assertions.assertThat(gameService.findPlayer(player.getId()).getName()).isEqualTo(newName);
+    }
+
+    @DisplayName("Player Service Get All Players - Should return a list of all players")
+    @Test
+    public void getAllPlayersTest_ShouldReturnListOfPlayers() {
+        List<Player> players = new ArrayList<>();
+        Player player1 = Player.builder().build();
+        Player player2 = Player.builder().build();
+        players.add(player1);
+        players.add(player2);
+        when(playerRepository.findAll()).thenReturn(players);
+
+        List<Player> result = playerService.getAllPlayers();
+
+        verify(playerRepository, times(1)).findAll();
+        Assertions.assertThat((players)).isEqualTo(result);
     }
 }
