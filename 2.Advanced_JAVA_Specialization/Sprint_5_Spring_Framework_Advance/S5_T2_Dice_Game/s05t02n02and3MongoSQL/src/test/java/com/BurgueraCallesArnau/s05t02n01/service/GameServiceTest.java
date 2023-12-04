@@ -4,7 +4,6 @@ import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.repository.GameRepository;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.assertj.core.api.Assertions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +21,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class GameServiceTest {
-    //TODO findPlayer(id), getGamesForPlayer(playerId)
-    //TODO  deleteGamesFromRepo(ObjectId playerId)
 
     @Mock
     private GameRepository gameRepository;
