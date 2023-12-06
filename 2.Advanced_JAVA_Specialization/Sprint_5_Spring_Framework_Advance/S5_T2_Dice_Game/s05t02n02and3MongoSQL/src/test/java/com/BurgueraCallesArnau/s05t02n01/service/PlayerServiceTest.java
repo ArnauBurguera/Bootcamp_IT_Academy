@@ -2,6 +2,7 @@ package com.BurgueraCallesArnau.s05t02n01.service;
 
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.assertj.core.api.Assertions;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
@@ -42,6 +43,7 @@ public class PlayerServiceTest {
     @Test
     public void createPlayerTest_ShouldSavePlayerWithDefaultName() {
         Player player = Player.builder()
+                .id(new ObjectId("655c7adf06e4ae59f47979ca"))
                 .name("Juanjo fa Kockey")
                 .games(new ArrayList<>())
                 .build();
@@ -55,12 +57,12 @@ public class PlayerServiceTest {
     @Test
     public void updatePlayerNameTest_ShouldUpdatePlayerName() {
         String newName = "NewName";
-        Player player = Player.builder().games(new ArrayList<>()).build();
+        Player player = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).games(new ArrayList<>()).build();
 
         when(gameService.findPlayer(player.getId())).thenReturn(player);
         when(playerRepository.save(player)).thenReturn(player);
 
-        /*Player updatedPlayer = */playerService.updatePlayerName(player.getId(), newName);
+        playerService.updatePlayerName(player.getId(), newName);
 
         verify(playerRepository, times(1)).save(player);
         Assertions.assertThat(gameService.findPlayer(player.getId()).getName()).isEqualTo(newName);
@@ -70,8 +72,8 @@ public class PlayerServiceTest {
     @Test
     public void getAllPlayersTest_ShouldReturnListOfPlayers() {
         List<Player> players = new ArrayList<>();
-        Player player1 = Player.builder().build();
-        Player player2 = Player.builder().build();
+        Player player1 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
+        Player player2 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979cb")).build();
         players.add(player1);
         players.add(player2);
         when(playerRepository.findAll()).thenReturn(players);
@@ -85,7 +87,7 @@ public class PlayerServiceTest {
     @DisplayName("Player Service Get Player Games - Should return the list of player's games")
     @Test
     public void getPlayerGamesTest_ShouldReturnListOfPlayerGames() {
-        Player player = Player.builder().build();
+        Player player = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
         Game game1 = Game.builder().build();
         Game game2 = Game.builder().build();
         List<Game> games = new ArrayList<>();
@@ -102,7 +104,8 @@ public class PlayerServiceTest {
     @DisplayName("Player Service Calculate Success Percentage - Should calculate success percentage")
     @Test
     public void calculateSuccessPercentageTest_ShouldCalculateSuccessPercentage() {
-        Player player = Player.builder().build();
+        Player player = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
+        System.out.println(player.getId());
         List<Game> games = new ArrayList<>();
         Game game1 = Game.builder().won(true).build();
         Game game2 = Game.builder().won(false).build();
@@ -117,24 +120,28 @@ public class PlayerServiceTest {
         Assertions.assertThat(PERCENTAGE).isEqualTo(result);
     }
 
-   /* @DisplayName("Player Service Calculate Average Success Percentage - Should calculate average success percentage")
+    @DisplayName("Player Service Calculate Average Success Percentage - Should calculate average success percentage")
     @Test
     public void calculateAverageSuccessPercentageTest_ShouldCalculateAverageSuccessPercentage() {
-        PlayerService playerServiceMock = Mockito.mock(PlayerService.class);
-        Player player1 = Player.builder().build();
-        Player player2 = Player.builder().build();
+        PlayerService spy = Mockito.spy(playerService);//To partially stub methods in this class
+        Player player1 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
+        Player player2 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979cb")).build();
+        System.out.println(player1.getId());
+        System.out.println(player2.getId());
         List<Player> players = new ArrayList<>();
         players.add(player1);
         players.add(player2);
         final double  PERCENTAGE = 50.0d;
-        when(playerServiceMock.getAllPlayers()).thenReturn(players);
-        doReturn(100.0d).when(playerServiceMock).calculateSuccessPercentage(player1.getId());
-        doReturn(0.0d).when(playerServiceMock).calculateSuccessPercentage(player2.getId());
+        when(spy.getAllPlayers()).thenReturn(players);//stub the methods that have to be mocked in class
+        when(spy.calculateSuccessPercentage(player1.getId())).thenReturn(100.0d);
+        when(spy.calculateSuccessPercentage(player2.getId())).thenReturn(0.0d);
 
-        double result = playerService.calculateAverageSuccessPercentage();
-        System.out.printf("reslut is " + result);
+        double result = spy.calculateAverageSuccessPercentage();
+        System.out.printf("Player1 " + spy.calculateSuccessPercentage(player1.getId()));
+        System.out.printf("Player2 " + spy.calculateSuccessPercentage(player2.getId()));
+        System.out.printf("result is " + result);
 
         verify(playerRepository, times(1)).findAll();
         Assertions.assertThat(PERCENTAGE).isEqualTo(result);
-    }*/
+    }
 }
