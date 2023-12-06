@@ -22,7 +22,7 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 public class PlayerServiceTest {
     /*TODO checkPlayerName(Player player)
-    TODO calculateAverageSuccessPercentage(), getPlayersRankedBySuccessPercentage(), getLoser(), getWinner()
+    TODO getPlayersRankedBySuccessPercentage(), getLoser(), getWinner()
     TODO deletePlayer(ObjectId playerId)
      */
 
@@ -43,7 +43,7 @@ public class PlayerServiceTest {
     @Test
     public void createPlayerTest_ShouldSavePlayerWithDefaultName() {
         Player player = Player.builder()
-                .id(new ObjectId("655c7adf06e4ae59f47979ca"))
+                .id(new ObjectId("655c7adf06e4ae59f47979ca"))//need to add Ids manually 'cause mocks don't behave as repos would
                 .name("Juanjo fa Kockey")
                 .games(new ArrayList<>())
                 .build();
@@ -138,5 +138,28 @@ public class PlayerServiceTest {
 
         verify(playerRepository, times(1)).findAll();
         Assertions.assertThat(PERCENTAGE).isEqualTo(result);
+    }
+
+    @DisplayName("Player Service Get Players Ranked By Success Percentage - Should return players ranked by success percentage")
+    @Test
+    public void getPlayersRankedBySuccessPercentageTest_ShouldReturnPlayersRankedBySuccessPercentage() {
+        PlayerService spy = Mockito.spy(playerService);//To partially stub methods in this class
+        Player player1 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
+        Player player2 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979cb")).build();
+        Player player3 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979cc")).build();
+        List<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        when(playerRepository.findAll()).thenReturn(players);
+        when(spy.calculateSuccessPercentage(player1.getId())).thenReturn(100.0d);
+        when(spy.calculateSuccessPercentage(player2.getId())).thenReturn(0.0d);
+        when(spy.calculateSuccessPercentage(player3.getId())).thenReturn(50.0d);
+
+        List<Player> result = spy.getPlayersRankedBySuccessPercentage();
+        System.out.println(result.toString());
+
+        verify(playerRepository, times(1)).findAll();
+        Assertions.assertThat(result).containsExactly(player1,player3,player2);
     }
 }
