@@ -22,7 +22,6 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 public class PlayerServiceTest {
     /*TODO checkPlayerName(Player player)
-    TODO getPlayersRankedBySuccessPercentage(), getLoser(), getWinner()
     TODO deletePlayer(ObjectId playerId)
      */
 
@@ -205,5 +204,21 @@ public class PlayerServiceTest {
 
         verify(playerRepository, times(1)).findAll();
         Assertions.assertThat(winner).isSameAs(player1);
+    }
+
+    @DisplayName("Player Service Delete Player - Should delete player and associated games")
+    @Test
+    public void deletePlayerTest_ShouldDeletePlayerAndGames() {
+        Player player = Player.builder()
+                .id(new ObjectId("655c7adf06e4ae59f47979ca"))
+                .games(new ArrayList<>())
+                .build();
+
+        when(gameService.findPlayer(player.getId())).thenReturn(player);
+
+        playerService.deletePlayer(player.getId());
+
+        verify(gameService, times(1)).deleteGamesFromRepo(player.getId());
+        verify(playerRepository, times(1)).delete(player);
     }
 }
