@@ -10,17 +10,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @ExtendWith(MockitoExtension.class)
 public class PlayerServiceTest {
     /*TODO checkPlayerName(Player player)
-    TODO calculateSuccessPercentage(ObjectId playerId)
     TODO calculateAverageSuccessPercentage(), getPlayersRankedBySuccessPercentage(), getLoser(), getWinner()
     TODO deletePlayer(ObjectId playerId)
      */
@@ -60,7 +60,7 @@ public class PlayerServiceTest {
         when(gameService.findPlayer(player.getId())).thenReturn(player);
         when(playerRepository.save(player)).thenReturn(player);
 
-        Player updatedPlayer = playerService.updatePlayerName(player.getId(), newName);
+        /*Player updatedPlayer = */playerService.updatePlayerName(player.getId(), newName);
 
         verify(playerRepository, times(1)).save(player);
         Assertions.assertThat(gameService.findPlayer(player.getId()).getName()).isEqualTo(newName);
@@ -116,4 +116,25 @@ public class PlayerServiceTest {
         verify(gameService, times(1)).getGamesForPlayer(player.getId());
         Assertions.assertThat(PERCENTAGE).isEqualTo(result);
     }
+
+   /* @DisplayName("Player Service Calculate Average Success Percentage - Should calculate average success percentage")
+    @Test
+    public void calculateAverageSuccessPercentageTest_ShouldCalculateAverageSuccessPercentage() {
+        PlayerService playerServiceMock = Mockito.mock(PlayerService.class);
+        Player player1 = Player.builder().build();
+        Player player2 = Player.builder().build();
+        List<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        final double  PERCENTAGE = 50.0d;
+        when(playerServiceMock.getAllPlayers()).thenReturn(players);
+        doReturn(100.0d).when(playerServiceMock).calculateSuccessPercentage(player1.getId());
+        doReturn(0.0d).when(playerServiceMock).calculateSuccessPercentage(player2.getId());
+
+        double result = playerService.calculateAverageSuccessPercentage();
+        System.out.printf("reslut is " + result);
+
+        verify(playerRepository, times(1)).findAll();
+        Assertions.assertThat(PERCENTAGE).isEqualTo(result);
+    }*/
 }
