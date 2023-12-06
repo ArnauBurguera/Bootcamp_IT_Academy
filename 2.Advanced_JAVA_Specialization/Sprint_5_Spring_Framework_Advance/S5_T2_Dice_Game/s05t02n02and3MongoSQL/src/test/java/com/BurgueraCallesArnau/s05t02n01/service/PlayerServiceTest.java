@@ -21,9 +21,6 @@ import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class PlayerServiceTest {
-    /*TODO checkPlayerName(Player player)
-    TODO deletePlayer(ObjectId playerId)
-     */
 
     @Mock
     private PlayerRepository playerRepository;
@@ -104,7 +101,6 @@ public class PlayerServiceTest {
     @Test
     public void calculateSuccessPercentageTest_ShouldCalculateSuccessPercentage() {
         Player player = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
-        System.out.println(player.getId());
         List<Game> games = new ArrayList<>();
         Game game1 = Game.builder().won(true).build();
         Game game2 = Game.builder().won(false).build();
@@ -156,7 +152,6 @@ public class PlayerServiceTest {
         when(spy.calculateSuccessPercentage(player3.getId())).thenReturn(50.0d);
 
         List<Player> result = spy.getPlayersRankedBySuccessPercentage();
-        System.out.println(result.toString());
 
         verify(playerRepository, times(1)).findAll();
         Assertions.assertThat(result).containsExactly(player1,player3,player2);
