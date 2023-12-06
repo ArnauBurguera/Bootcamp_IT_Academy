@@ -184,4 +184,26 @@ public class PlayerServiceTest {
         verify(playerRepository, times(1)).findAll();
         Assertions.assertThat(loser).isSameAs(player2);
     }
+
+    @DisplayName("Player Service Get Winner - Should return the player with the highest success percentage")
+    @Test
+    public void getWinnerTest_ShouldReturnPlayerWithHighestSuccessPercentage() {
+        PlayerService spy = Mockito.spy(playerService);//To partially stub methods in this class
+        Player player1 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
+        Player player2 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979cb")).build();
+        Player player3 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979cc")).build();
+        List<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        when(playerRepository.findAll()).thenReturn(players);
+        when(spy.calculateSuccessPercentage(player1.getId())).thenReturn(100.0d);
+        when(spy.calculateSuccessPercentage(player2.getId())).thenReturn(0.0d);
+        when(spy.calculateSuccessPercentage(player3.getId())).thenReturn(50.0d);
+
+        Player winner = spy.getWinner();
+
+        verify(playerRepository, times(1)).findAll();
+        Assertions.assertThat(winner).isSameAs(player1);
+    }
 }
