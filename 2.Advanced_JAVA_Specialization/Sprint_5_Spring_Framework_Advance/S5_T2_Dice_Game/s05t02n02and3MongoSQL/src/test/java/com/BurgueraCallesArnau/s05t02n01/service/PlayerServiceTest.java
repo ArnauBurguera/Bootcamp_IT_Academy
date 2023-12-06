@@ -126,8 +126,6 @@ public class PlayerServiceTest {
         PlayerService spy = Mockito.spy(playerService);//To partially stub methods in this class
         Player player1 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
         Player player2 = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979cb")).build();
-        System.out.println(player1.getId());
-        System.out.println(player2.getId());
         List<Player> players = new ArrayList<>();
         players.add(player1);
         players.add(player2);
@@ -137,9 +135,6 @@ public class PlayerServiceTest {
         when(spy.calculateSuccessPercentage(player2.getId())).thenReturn(0.0d);
 
         double result = spy.calculateAverageSuccessPercentage();
-        System.out.printf("Player1 " + spy.calculateSuccessPercentage(player1.getId()));
-        System.out.printf("Player2 " + spy.calculateSuccessPercentage(player2.getId()));
-        System.out.printf("result is " + result);
 
         verify(playerRepository, times(1)).findAll();
         Assertions.assertThat(PERCENTAGE).isEqualTo(result);
