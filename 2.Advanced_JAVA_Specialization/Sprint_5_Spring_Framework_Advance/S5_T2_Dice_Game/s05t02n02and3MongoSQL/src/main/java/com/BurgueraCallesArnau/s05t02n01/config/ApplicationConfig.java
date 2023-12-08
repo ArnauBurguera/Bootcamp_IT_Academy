@@ -1,6 +1,7 @@
 package com.BurgueraCallesArnau.s05t02n01.config;
 
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
+import com.BurgueraCallesArnau.s05t02n01.security.JwtService;
 import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
