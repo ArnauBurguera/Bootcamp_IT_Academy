@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,20 +49,23 @@ class GameControllerTest {
         this.objectMapper = objectMapper;
     }
 
-
     @Test
     @DisplayName("Play Game - Should return 201 Created with a Game Object")
     public void playGameTest_ShouldReturnCreatedWithGameObject() throws Exception {
-
         Player player = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
         Game game = Game.builder().build();
 
         given(gameService.playGame(player.getId())).willReturn(game);
         mockMvc.perform(post("/players/{playerId}/games/play", player.getId())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(game)))
-
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(game)))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    @DisplayName("Play Game - Should return 404 Not Found when player not found")
+    public void playGameTest_ShouldReturnNotFoundWhenPlayerNotFound() throws Exception {
+        Player player = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
 
         given(gameService.playGame(player.getId())).willThrow(PlayerNotFoundException.class);
         mockMvc.perform(post("/players/{playerId}/games/play", player.getId()))
@@ -78,13 +82,16 @@ class GameControllerTest {
                 .andExpect(status().isOk());
     }
 
-   /* @Test
+    @Test
     @DisplayName("Delete Games For Player - Should throw PlayerNotFoundException when player not found")
     public void deleteGamesForPlayerTest_ShouldThrowPlayerNotFoundException() throws Exception {
+        Player player = Player.builder().id(new ObjectId("655c7adf06e4ae59f47979ca")).build();
 
-        given(gameService.deleteGamesForPlayer(new ObjectId("655c7adf06e4ae59f47979ca"))).willThrow(PlayerNotFoundException.class);
-        mockMvc.perform(delete("/players/{playerId}/games", new ObjectId("655c7adf06e4ae59f47979ca")))
+        doThrow(PlayerNotFoundException.class)
+                .when(gameService)
+                .deleteGamesForPlayer(player.getId());
+        mockMvc.perform(delete("/players/{playerId}/games/delete", player.getId()))
                 .andExpect(status().isNotFound());
-    }*/
+    }
 
 }
