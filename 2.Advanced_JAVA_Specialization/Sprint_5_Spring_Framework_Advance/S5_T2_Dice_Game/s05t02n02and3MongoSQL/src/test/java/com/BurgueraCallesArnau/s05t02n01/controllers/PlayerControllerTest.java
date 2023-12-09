@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.Mockito.*;
 import org.bson.types.ObjectId;
@@ -34,7 +35,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.assertj.core.api.Assertions;
+
+import java.util.Map;
 
 import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.mockito.BDDMockito.given;
@@ -91,25 +96,34 @@ public class PlayerControllerTest {
     @Test
     @DisplayName("Update Player Name - Should return 200 OK with updated player")
     public void updatePlayerName_ShouldReturnOkWithUpdatedPlayer() throws Exception {
-        RegisterRequest registerRequest = new RegisterRequest("Miquel", "mdebonbcn@gmail.com", "passworD123+");
-        ObjectId playerId = new ObjectId("655c7adf06e4ae59f47979ca");
-        String newName = "NewName";
-        Player updatedPlayer = Player.builder().id(playerId).name(newName).build();
+        String newName = "newName";
+        /*String jsonContent = objectMapper.writeValueAsString(Map.of("name", newName));*/
+        Player updatedPlayer = Player.builder()
+                .id(new ObjectId("655c7adf06e4ae59f47979ca"))
+                .name(newName)
+                .build();
 
-        given(playerService.updatePlayerName(playerId, newName)).willReturn(updatedPlayer);
+        System.out.println("id ies " + updatedPlayer.toString());
 
-        /*mockMvc.perform(put("/players/update/{id}", playerId)
+        given(playerService.updatePlayerName(updatedPlayer.getId(), newName)).willReturn(updatedPlayer);
+
+        MvcResult result = mockMvc.perform(put("/players/update/{id}", updatedPlayer.getId())
+                        .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(newName))
+                       /* .content(new ObjectMapper().writeValueAsString(newName)))*/ //200 but dosn't return
+                        .content(newName))//500 but returns
+               /* .andReturn();*/
+
+
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(playerId.toHexString()))
-                .andExpect(jsonPath("$.name").value(newName));*/
-        
-        mockMvc.perform(put("/players/update/{id}", playerId, registerRequest)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsBytes(registerRequest)))
-
-                .andExpect(status().isOk());
+                .andReturn();
+                /*.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(updatedPlayer.getId()))
+                .andExpect(jsonPath("$.name").value(updatedPlayer.getName()));*/
+        MockHttpServletResponse response = result.getResponse();
+        System.out.println("Response Headers: " + response.getHeaderNames());
+        System.out.println("Response Content Type: " + response.getContentType());
+        System.out.println("Response Body: " + response.getContentAsString());
     }
 
     @Test
