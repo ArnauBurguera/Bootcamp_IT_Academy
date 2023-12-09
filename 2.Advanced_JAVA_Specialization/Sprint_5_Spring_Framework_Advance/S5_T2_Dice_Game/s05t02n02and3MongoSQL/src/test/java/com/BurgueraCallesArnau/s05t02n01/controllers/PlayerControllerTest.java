@@ -45,6 +45,7 @@ import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -95,6 +96,34 @@ public class PlayerControllerTest {
 
     @Test
     @DisplayName("Update Player Name - Should return 200 OK with updated player")
+    public void updatePlayerName_ShouldReturnOkWithUpdatedPlayer1() throws Exception {
+        String newName = "newName";
+        Player player = Player.builder()
+                .id(new ObjectId("655c7adf06e4ae59f47979ca"))
+                .name(newName)
+                .build();
+        /*when(playerService.updatePlayerName(updatedPlayer.getId(), newName)).thenReturn(updatedPlayer);*/
+        given(playerService.updatePlayerName(player.getId(), newName)).willReturn(player);
+
+        MockHttpServletResponse result = mockMvc.perform(put("/players/update/{id}", player.getId())
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.TEXT_PLAIN)//indiferent si es plaintext o json
+                        .content(/*objectMapper.writeValueAsString(*/newName)/*)*/) //SI ES OBJECTE RETORNA
+                        .andDo(print())
+
+
+                        /*.content(new ObjectMapper().writeValueAsString(newName))*/
+
+               /* .andExpect(status().isOk())*/
+                .andExpect(jsonPath("$.name").value(player.getName()))
+                .andReturn().getResponse();
+
+        System.out.println("RESULT!!!!!: " + result.getContentAsString());
+                /*.andExpect(jsonPath("$.id").value(updatedPlayer.getId().toString()));*/
+    }
+
+    @Test
+    @DisplayName("Update Player Name - Should return 200 OK with updated player")
     public void updatePlayerName_ShouldReturnOkWithUpdatedPlayer() throws Exception {
         String newName = "newName";
         /*String jsonContent = objectMapper.writeValueAsString(Map.of("name", newName));*/
@@ -103,16 +132,16 @@ public class PlayerControllerTest {
                 .name(newName)
                 .build();
 
-        System.out.println("id ies " + updatedPlayer.toString());
+       /* System.out.println("id ies " + updatedPlayer.toString());*/
 
         given(playerService.updatePlayerName(updatedPlayer.getId(), newName)).willReturn(updatedPlayer);
 
-        MvcResult result = mockMvc.perform(put("/players/update/{id}", updatedPlayer.getId())
+        /*MvcResult result = */mockMvc.perform(put("/players/update/{id}", updatedPlayer.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                       /* .content(new ObjectMapper().writeValueAsString(newName)))*/ //200 but dosn't return
+                       /* .content(new ObjectMapper().writeValueAsString(newName))) //200 but dosn't return*/
                         .content(newName))//500 but returns
-               /* .andReturn();*/
+                /*.andReturn();*/
 
 
                 .andExpect(status().isOk())
@@ -120,10 +149,10 @@ public class PlayerControllerTest {
                 /*.andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(updatedPlayer.getId()))
                 .andExpect(jsonPath("$.name").value(updatedPlayer.getName()));*/
-        MockHttpServletResponse response = result.getResponse();
+       /* MockHttpServletResponse response = result.getResponse();
         System.out.println("Response Headers: " + response.getHeaderNames());
         System.out.println("Response Content Type: " + response.getContentType());
-        System.out.println("Response Body: " + response.getContentAsString());
+        System.out.println("Response Body: " + response.getContentAsString());*/
     }
 
     @Test
