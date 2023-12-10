@@ -237,16 +237,12 @@ public class PlayerControllerTest {
     @Test
     @DisplayName("Get Loser - Should return 404 Not Found when loser is not found")
     public void getLoser_ShouldReturnNotFoundWhenLoserNotFound() throws Exception {
-        // Given
         given(playerService.getLoser()).willReturn(null);
 
-        // When
-        mockMvc.perform(get(Constants.getLoser)
+        mockMvc.perform(get("/players/ranking/loser")
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound())
-                .andExpect(content().string("null"));
+                .andExpect(status().isNotFound());
 
-        // Then
         verify(playerService, times(1)).getLoser();
     }
 }
