@@ -159,20 +159,18 @@ public class PlayerControllerTest {
     @Test
     @DisplayName("Get Player Games - Should return 200 OK with player games")
     public void getPlayerGames_ShouldReturnOkWithPlayerGames() throws Exception {
-        ObjectId playerId = new ObjectId("655c7adf06e4ae59f47979ca");
-        List<Game> games = this.games;
+        given(playerService.getPlayerGames(PLAYERID)).willReturn(this.games);
 
-        given(playerService.getPlayerGames(playerId)).willReturn(games);
-
-        // Act and Assert
-        mockMvc.perform(get("/players/{id}/games", playerId)
+        mockMvc.perform(get("/players/{id}/games", PLAYERID)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(games.size()))
-                .andExpect(jsonPath("$[0].name").value("Game1"))
-                .andExpect(jsonPath("$[1].name").value("Game2"))
-                .andExpect(jsonPath("$[2].name").value("Game3"));
+                .andExpect(jsonPath("$[0].won").value(true))
+                .andExpect(jsonPath("$[1].won").value(true))
+                .andExpect(jsonPath("$[2].won").value(false));
     }
+
+    
 }
