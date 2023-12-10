@@ -103,6 +103,7 @@ public class PlayerControllerTest {
         games = Arrays.asList(
                 Game.builder().playerId(PLAYERID).won(true).build(),
                 Game.builder().playerId(PLAYERID).won(true).build(),
+                Game.builder().playerId(PLAYERID).won(false).build(),
                 Game.builder().playerId(PLAYERID).won(false).build()
         );
     }
@@ -172,5 +173,17 @@ public class PlayerControllerTest {
                 .andExpect(jsonPath("$[2].won").value(false));
     }
 
-    
+    @Test
+    @DisplayName("Calculate Success Percentage - Should return 200 OK with success percentage")
+    public void calculateSuccessPercentage_ShouldReturnOkWithSuccessPercentage() throws Exception {
+        double successPercentage = 50.0;
+        given(playerService.calculateSuccessPercentage(PLAYERID)).willReturn(successPercentage);
+
+        mockMvc.perform(get("/players/{id}/successPercentage", PLAYERID)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value(successPercentage));
+        
+        verify(playerService, times(1)).calculateSuccessPercentage(PLAYERID);
+    }
 }
