@@ -28,7 +28,7 @@ public class PlayerController {
     @Operation(summary = Constants.updatePlayerSummary, description = Constants.updatePlayerDescr)
     public ResponseEntity<Player> updatePlayerName(
             @Parameter(description = Constants.updatePlayerParam, required = true)
-            @PathVariable ObjectId id, @RequestBody String name
+            @PathVariable ObjectId id, @RequestBody  String name
     ) {
         Player updatedPlayer = playerService.updatePlayerName(id, name);
         return ResponseEntity.ok(updatedPlayer);

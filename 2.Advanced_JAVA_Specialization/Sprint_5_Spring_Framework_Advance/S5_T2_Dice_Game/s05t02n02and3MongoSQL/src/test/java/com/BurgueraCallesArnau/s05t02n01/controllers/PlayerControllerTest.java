@@ -3,6 +3,7 @@ package com.BurgueraCallesArnau.s05t02n01.controllers;
 import com.BurgueraCallesArnau.s05t02n01.controllers.rest.GameController;
 import com.BurgueraCallesArnau.s05t02n01.controllers.rest.PlayerController;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
+import com.BurgueraCallesArnau.s05t02n01.model.domain.Role;
 import com.BurgueraCallesArnau.s05t02n01.security.JwtService;
 import com.BurgueraCallesArnau.s05t02n01.security.RegisterRequest;
 import com.BurgueraCallesArnau.s05t02n01.service.GameService;
@@ -84,17 +85,19 @@ public class PlayerControllerTest {
         Player player = Player.builder()
                 .id(new ObjectId("655c7adf06e4ae59f47979ca"))
                 .name(newName)
+                .role(Role.USER)
                 .build();
         given(playerService.updatePlayerName(player.getId(), newName)).willReturn(player);
 
-        mockMvc.perform(put("/players/update/{id}", player.getId())
+        mockMvc.perform(put("/players/update/{id}", player.getId(), newName)
                         .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.TEXT_PLAIN_VALUE)//indiferent si es plaintext o json
+                        .contentType(MediaType.APPLICATION_JSON)//indiferent si es plaintext o json
                         .content(/*objectMapper.writeValueAsString(*/newName/*)*/) //SI ES OBJECTE RETORNA
                         .characterEncoding("utf-8"))
+                       /* .param("name", newName))*/
                         .andDo(print())
 
-                /*.andExpect(status().isOk())*/
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value(player.getName()));
     }
 
