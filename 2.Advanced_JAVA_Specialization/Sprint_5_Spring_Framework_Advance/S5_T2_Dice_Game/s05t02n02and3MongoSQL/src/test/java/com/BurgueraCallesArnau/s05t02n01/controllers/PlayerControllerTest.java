@@ -1,12 +1,10 @@
 package com.BurgueraCallesArnau.s05t02n01.controllers;
 
-import com.BurgueraCallesArnau.s05t02n01.controllers.rest.GameController;
 import com.BurgueraCallesArnau.s05t02n01.controllers.rest.PlayerController;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Game;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Role;
 import com.BurgueraCallesArnau.s05t02n01.security.JwtService;
-import com.BurgueraCallesArnau.s05t02n01.security.RegisterRequest;
 import com.BurgueraCallesArnau.s05t02n01.service.GameService;
 import com.BurgueraCallesArnau.s05t02n01.service.PlayerService;
 import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
@@ -20,36 +18,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.assertj.core.api.Assertions;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -58,14 +39,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.mockito.BDDMockito.given;
 
 @WebMvcTest(controllers = PlayerController.class)
 @AutoConfigureMockMvc(addFilters = false)//circumvent security
 @ExtendWith(MockitoExtension.class)
 public class PlayerControllerTest {
     private final MockMvc mockMvc;
-    private final ObjectMapper objectMapper;
 
     @MockBean
     private PlayerService playerService;
@@ -83,9 +62,8 @@ public class PlayerControllerTest {
     private List<Game> games;
 
     @Autowired
-    PlayerControllerTest(MockMvc mockMvc, ObjectMapper objectMapper) {
+    PlayerControllerTest(MockMvc mockMvc) {
         this.mockMvc = mockMvc;
-        this.objectMapper = objectMapper;
         this.PLAYERID = new ObjectId("655c7adf06e4ae59f47979ca");
     }
 
