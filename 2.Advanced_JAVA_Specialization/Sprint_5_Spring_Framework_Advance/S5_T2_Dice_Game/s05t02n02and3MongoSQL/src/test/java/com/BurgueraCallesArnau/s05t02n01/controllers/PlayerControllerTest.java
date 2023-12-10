@@ -116,14 +116,13 @@ public class PlayerControllerTest {
         given(playerService.updatePlayerName(PLAYERID, newName)).willReturn(updatedplayer);
 
         mockMvc.perform(put("/players/update/{id}", PLAYERID, newName)
-                        /*.accept(MediaType.APPLICATION_JSON)*/
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(newName)
                         .characterEncoding("utf-8"))
                         .andDo(print())
 
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value(updatedplayer.getName()));
+                .andExpect(jsonPath("$.name").value(newName));
     }
 
     @Test
