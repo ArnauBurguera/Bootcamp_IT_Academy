@@ -9,6 +9,7 @@ import com.BurgueraCallesArnau.s05t02n01.security.AuthenticationResponse;
 import com.BurgueraCallesArnau.s05t02n01.security.JwtService;
 import com.BurgueraCallesArnau.s05t02n01.security.RegisterRequest;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -41,11 +42,13 @@ public class AuthenticationServiceTest {
     @Mock
     private AuthenticationManager authenticationManager;
 
+
     @InjectMocks
     private AuthenticationService authenticationService;
 
+    @DisplayName("Register - Should successfully register a player and return a valid JWT token")
     @Test
-    void register_Success() {
+    void registerTest_ShouldReturnJwtToken() {
         RegisterRequest registerRequest = new RegisterRequest("John Doe", "john@example.com", "password");
         when(passwordEncoder.encode(registerRequest.getPassword())).thenReturn("encodedPassword");
         when(jwtService.generateToken(any(Player.class))).thenReturn("jwtToken");
@@ -56,8 +59,9 @@ public class AuthenticationServiceTest {
         verify(playerService, times(1)).createPlayer(any(Player.class));
     }
 
+    @DisplayName("Authenticate - Should successfully authenticate and return a valid JWT token")
     @Test
-    void authenticate_Success() {
+    void authenticateTest_ShouldReturnJwtToken() {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest("john@example.com", "password");
         Player mockPlayer = Player.builder().name("John Doe").email("john@example.com").password("encodedPassword").build();
 
@@ -69,8 +73,9 @@ public class AuthenticationServiceTest {
         Assertions.assertThat("jwtToken").isEqualTo(response.getToken());
     }
 
+    @DisplayName("Authenticate - Should throw PlayerNotFoundException for invalid credentials")
     @Test
-    void authenticate_InvalidCredentials() {
+    void authenticateTest_ShouldThrowPlayerNotFoundException() {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest("nonexistent@example.com", "password");
 
         when(playerRepository.findByEmail(authenticationRequest.getEmail())).thenThrow(PlayerNotFoundException.class);
