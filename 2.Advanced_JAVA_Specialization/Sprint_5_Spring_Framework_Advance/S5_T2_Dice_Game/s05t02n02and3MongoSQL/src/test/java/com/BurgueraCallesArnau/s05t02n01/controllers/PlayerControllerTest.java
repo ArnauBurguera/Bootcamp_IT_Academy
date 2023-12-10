@@ -22,6 +22,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.DisplayName;
@@ -200,5 +202,24 @@ public class PlayerControllerTest {
                 .andExpect(jsonPath("$").value(averageSuccessPercentage));
 
         verify(playerService, times(1)).calculateAverageSuccessPercentage();
+    }
+
+    @Test
+    @DisplayName("Get Ranking Based On Success Percentage - Should return 200 OK with player ranking")
+    public void getRankingBasedOnSuccessPercentage_ShouldReturnOkWithPlayerRanking() throws Exception {
+        List<Player> ranking = Arrays.asList(player, player2);
+        given(playerService.getPlayersRankedBySuccessPercentage()).willReturn(ranking);
+
+        mockMvc.perform(get("/players/ranking")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(ranking.size())))
+                .andExpect(jsonPath("$[0].name").value(player.getName()))
+                .andExpect(jsonPath("$[0].role").value(player.getRole().name()))
+                .andExpect(jsonPath("$[1].name").value(player2.getName()))
+                .andExpect(jsonPath("$[1].role").value(player2.getRole().name()));
+        
+        verify(playerService, times(1)).getPlayersRankedBySuccessPercentage();
     }
 }
