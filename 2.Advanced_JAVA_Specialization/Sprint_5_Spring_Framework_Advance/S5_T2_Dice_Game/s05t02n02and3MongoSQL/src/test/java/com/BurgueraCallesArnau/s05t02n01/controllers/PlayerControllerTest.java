@@ -8,7 +8,6 @@ import com.BurgueraCallesArnau.s05t02n01.security.JwtService;
 import com.BurgueraCallesArnau.s05t02n01.service.GameService;
 import com.BurgueraCallesArnau.s05t02n01.service.PlayerService;
 import com.BurgueraCallesArnau.s05t02n01.utils.Constants;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
