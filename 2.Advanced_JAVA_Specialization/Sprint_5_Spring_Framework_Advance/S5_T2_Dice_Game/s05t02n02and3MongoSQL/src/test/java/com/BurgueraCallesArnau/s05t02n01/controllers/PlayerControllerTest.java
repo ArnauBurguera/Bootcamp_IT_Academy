@@ -256,4 +256,16 @@ public class PlayerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value(player.getName()));
     }
+
+    @Test
+    @DisplayName("Get Winner - Should return 404 Not Found when Winner is not found")
+    public void getWinner_ShouldReturnNotFoundWhenWinnerNotFound() throws Exception {
+        given(playerService.getWinner()).willReturn(null);
+
+        mockMvc.perform(get("/players/ranking/winner")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+
+        verify(playerService, times(1)).getWinner();
+    }
 }
