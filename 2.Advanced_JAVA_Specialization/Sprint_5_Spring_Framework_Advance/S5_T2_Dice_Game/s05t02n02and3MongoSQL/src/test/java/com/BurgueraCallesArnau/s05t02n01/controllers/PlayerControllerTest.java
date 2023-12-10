@@ -219,7 +219,34 @@ public class PlayerControllerTest {
                 .andExpect(jsonPath("$[0].role").value(player.getRole().name()))
                 .andExpect(jsonPath("$[1].name").value(player2.getName()))
                 .andExpect(jsonPath("$[1].role").value(player2.getRole().name()));
-        
+
         verify(playerService, times(1)).getPlayersRankedBySuccessPercentage();
+    }
+    @Test
+    @DisplayName("Get Loser - Should return 200 OK with the loser player")
+    public void getLoser_ShouldReturnOkWithLoserPlayer() throws Exception {
+        given(playerService.getLoser()).willReturn(player);
+
+        mockMvc.perform(get("/players/ranking/loser")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(player.getName()));
+        verify(playerService, times(1)).getLoser();
+    }
+
+    @Test
+    @DisplayName("Get Loser - Should return 404 Not Found when loser is not found")
+    public void getLoser_ShouldReturnNotFoundWhenLoserNotFound() throws Exception {
+        // Given
+        given(playerService.getLoser()).willReturn(null);
+
+        // When
+        mockMvc.perform(get(Constants.getLoser)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("null"));
+
+        // Then
+        verify(playerService, times(1)).getLoser();
     }
 }
