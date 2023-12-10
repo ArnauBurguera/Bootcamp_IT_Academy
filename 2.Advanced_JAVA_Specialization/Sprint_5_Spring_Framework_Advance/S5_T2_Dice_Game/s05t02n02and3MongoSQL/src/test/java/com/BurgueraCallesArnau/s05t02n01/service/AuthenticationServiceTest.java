@@ -1,5 +1,6 @@
 package com.BurgueraCallesArnau.s05t02n01.service;
 
+import com.BurgueraCallesArnau.s05t02n01.exceptions.PlayerNotFoundException;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Player;
 import com.BurgueraCallesArnau.s05t02n01.model.domain.Role;
 import com.BurgueraCallesArnau.s05t02n01.repository.PlayerRepository;
@@ -68,12 +69,13 @@ public class AuthenticationServiceTest {
         Assertions.assertThat("jwtToken").isEqualTo(response.getToken());
     }
 
-    /*@Test
+    @Test
     void authenticate_InvalidCredentials() {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest("nonexistent@example.com", "password");
 
-        when(playerRepository.findByEmail(authenticationRequest.getEmail())).thenReturn(Optional.empty());
+        when(playerRepository.findByEmail(authenticationRequest.getEmail())).thenThrow(PlayerNotFoundException.class);
 
-        assertThrows(UsernameNotFoundException.class, () -> authenticationService.authenticate(authenticationRequest));
-    }*/
+        Assertions.assertThatThrownBy(() -> authenticationService.authenticate(authenticationRequest))
+                .isInstanceOf(PlayerNotFoundException.class);
+    }
 }
