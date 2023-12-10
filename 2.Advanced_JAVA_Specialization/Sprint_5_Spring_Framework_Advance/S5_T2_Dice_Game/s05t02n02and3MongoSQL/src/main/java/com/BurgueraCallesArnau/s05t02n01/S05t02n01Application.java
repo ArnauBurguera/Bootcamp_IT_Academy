@@ -12,10 +12,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 public class S05t02n01Application {
-
+	//http://localhost:9000/swagger-ui/index.html
 	public static void main(String[] args) {
 		SpringApplication.run(S05t02n01Application.class, args);
-		//http://localhost:9000/swagger-ui/index.html
 	}
 
 }
