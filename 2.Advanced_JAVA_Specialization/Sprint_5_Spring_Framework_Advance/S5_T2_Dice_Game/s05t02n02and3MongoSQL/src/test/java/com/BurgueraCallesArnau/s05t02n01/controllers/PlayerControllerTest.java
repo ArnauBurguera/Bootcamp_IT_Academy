@@ -183,7 +183,22 @@ public class PlayerControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(successPercentage));
-        
+
         verify(playerService, times(1)).calculateSuccessPercentage(PLAYERID);
+    }
+
+    @Test
+    @DisplayName("Calculate Average Success Percentage - Should return 200 OK with calculated percentage")
+    public void calculateAverageSuccessPercentage_ShouldReturnOkWithCalculatedPercentage() throws Exception {
+        double averageSuccessPercentage = 75.0;
+        given(playerService.calculateAverageSuccessPercentage()).willReturn(averageSuccessPercentage);
+
+        mockMvc.perform(get("/players/averageSuccess")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$").value(averageSuccessPercentage));
+
+        verify(playerService, times(1)).calculateAverageSuccessPercentage();
     }
 }
