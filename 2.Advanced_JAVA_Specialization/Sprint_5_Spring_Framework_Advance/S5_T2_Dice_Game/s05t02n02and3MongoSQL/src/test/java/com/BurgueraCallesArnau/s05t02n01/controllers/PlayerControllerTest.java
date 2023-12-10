@@ -245,4 +245,15 @@ public class PlayerControllerTest {
 
         verify(playerService, times(1)).getLoser();
     }
+
+    @Test
+    @DisplayName("Get Winner - Should return 200 OK with the winner")
+    public void getWinner_ShouldReturnOkWithWinner() throws Exception {
+        given(playerService.getWinner()).willReturn(player);
+
+        mockMvc.perform(get("/players/ranking/winner")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(player.getName()));
+    }
 }
