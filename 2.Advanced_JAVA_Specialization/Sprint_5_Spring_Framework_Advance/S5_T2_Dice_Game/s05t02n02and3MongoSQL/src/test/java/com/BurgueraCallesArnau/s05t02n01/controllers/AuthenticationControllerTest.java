@@ -34,13 +34,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = AuthenticationControllerTest.class)
-@AutoConfigureMockMvc(addFilters = false)//circumvent security
+/*@WebMvcTest(controllers = AuthenticationControllerTest.class)
+@AutoConfigureMockMvc(addFilters = false)//circumvent security*/
 @ExtendWith(MockitoExtension.class)
 public class AuthenticationControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private MockMvc mockMvc;
+    private /*final*/ MockMvc mockMvc;
 
     @Mock
     private AuthenticationService authenticationService;
@@ -51,6 +51,12 @@ public class AuthenticationControllerTest {
 
     @InjectMocks
     private AuthenticationController authenticationController;
+
+    /*@Autowired
+    AuthenticationControllerTest(MockMvc mockMvc) {
+        this.mockMvc = mockMvc;;
+    }*/
+
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(authenticationController).build();
@@ -59,10 +65,10 @@ public class AuthenticationControllerTest {
 
     @Test
     void testRegister() throws Exception {
-        RegisterRequest registerRequest = new RegisterRequest("John Doe", "john@example.com", "password");
+        RegisterRequest registerRequest = new RegisterRequest("Alex", "alex@gmail.com", "alexmore23");
         AuthenticationResponse expectedResponse = new AuthenticationResponse("expectedResponse");
 
-        /*given(authenticationService.register(registerRequest)).willReturn(expectedResponse);*/
+        given(authenticationService.register(registerRequest)).willReturn(expectedResponse);
 
         mockMvc.perform(post("/auth/register")
                         .accept(MediaType.APPLICATION_JSON)
@@ -70,8 +76,8 @@ public class AuthenticationControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))
                         .andDo(print())
-                .andExpect(status().isOk());
-                /*.andExpect(jsonPath("$.token").value("expectedResponse"));*/
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").value("expectedResponse"));
 
         verify(authenticationService, times(1)).register(registerRequest);
         verifyNoMoreInteractions(authenticationService);

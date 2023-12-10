@@ -24,7 +24,8 @@ public class AuthenticationController {
             @Parameter(description = Constants.registerSwaggerParam, required = true)
             @RequestBody RegisterRequest request
     ){
-        return  ResponseEntity.ok(authenticationService.register(request));
+        AuthenticationResponse response = authenticationService.register(request);
+        return  ResponseEntity.ok(response/*authenticationService.register(request)*/);
     }
 
     @PostMapping(Constants.authenticate)
