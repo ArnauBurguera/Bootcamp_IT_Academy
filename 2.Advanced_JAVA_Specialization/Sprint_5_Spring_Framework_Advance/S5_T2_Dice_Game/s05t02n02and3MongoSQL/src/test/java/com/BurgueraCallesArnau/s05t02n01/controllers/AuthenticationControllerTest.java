@@ -88,14 +88,15 @@ public class AuthenticationControllerTest {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest("john@example.com", "password");
         AuthenticationResponse expectedResponse = new AuthenticationResponse("expectedResponse");
 
-        when(authenticationService.authenticate(authenticationRequest)).thenReturn(expectedResponse);
+        given(authenticationService.authenticate(authenticationRequest)).willReturn(expectedResponse);
 
         mockMvc.perform(post("/auth/authenticate")
+                        .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(authenticationRequest))
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value("expectedValue"));
+                .andExpect(jsonPath("$.token").value("expectedResponse"));
 
         verify(authenticationService, times(1)).authenticate(authenticationRequest);
         verifyNoMoreInteractions(authenticationService);
